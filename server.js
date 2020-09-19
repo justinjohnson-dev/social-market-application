@@ -1,16 +1,20 @@
 "use strict";
+require('rootpath')();
 const express = require("express");
 const app = express();
+const cors = require('cors');
+const bodyParser = require('body-parser');
 
-//use port from env in container
-const port = process.env.port || 5000;
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
+app.use(cors());
 
 // test route
 app.get('/', (req, res) => {
   res.send('Hello World!')
 })
 
-// import routes
+// api routes
 
 // handle db connection to mongodb
 
@@ -18,9 +22,8 @@ app.get('/', (req, res) => {
 
 // routes middleware
 
-app.listen(port, err => {
-  if (err) {
-    return console.log("ERROR", err);
-  }
-  console.log(`Listening on port ${port}`);
+// start server
+const port = process.env.NODE_ENV === 'production' ? (process.env.PORT || 80) : 5000;
+const server = app.listen(port, function () {
+    console.log('Server listening on port ' + port);
 });
