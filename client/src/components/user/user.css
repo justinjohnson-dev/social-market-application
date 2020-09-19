@@ -1,0 +1,71 @@
+body {
+    background-color: whitesmoke;
+}
+
+.send-button {
+    border-radius: 9px;
+    background-color: rgb(223, 146, 94);
+    border: none;
+    color: #FFFFFF;
+    text-align: center;
+    font-size: 15px;
+    padding: 5px;
+    width: 190px;
+    transition: all 0.5s;
+    cursor: pointer;
+    margin-top: 5px;
+    margin-right: 5px;
+    margin-bottom: 5px;
+}
+
+.send-button span {
+    cursor: pointer;
+    display: inline-block;
+    position: relative;
+    transition: 0.5s;
+}
+
+.send-button span:after {
+    content: '\00bb';
+    position: absolute;
+    opacity: 0;
+    top: 0;
+    right: -20px;
+    transition: 0.5s;
+}
+
+.send-button:hover span {
+    padding-right: 25px;
+}
+
+.send-button:hover span:after {
+    opacity: 1;
+    right: 0;
+}
+
+.form-style {
+    background-color: white;
+    border: solid grey 1px;
+    padding: 1%;
+    margin: 0px auto;
+    width: 12%;
+    margin-top: 10%;
+}
+
+label {
+    color: white;
+}
+
+input {
+    width: 78%;
+    margin-bottom: 2%;
+}
+
+form {
+    text-align: center;
+    margin: 0px auto;
+}
+
+h3 {
+    margin:10px 0px 20px 0px;
+}
