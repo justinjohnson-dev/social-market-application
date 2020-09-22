@@ -5,6 +5,7 @@ const cookieParser = require('cookie-parser');
 const cors = require('cors');
 const bodyParser = require('body-parser');
 const path = require("path");
+require("dotenv").config();
 
 const app = express();
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -26,11 +27,15 @@ app.use((req, res, next) => {
 });
 
 // db conn
-mongoose.connect("mongodb://localhost/home-grown" || process.env.MONGODB_URI,{
-   useUnifiedTopology: true,
-   useNewUrlParser: true,
-   useCreateIndex: true,
-}).then(()=>{console.log("DB is connected")})
+const uri = process.env.MONGODB_URI;
+mongoose.connect(uri, {
+  useNewUrlParser: true,
+  useUnifiedTopology: true
+});
+
+mongoose.connection.on('connected', () => {
+  console.log('Mongoose is connected to atlas instance!');
+});
 
 // import routes
 const userRoutes = require('./routes/user');
