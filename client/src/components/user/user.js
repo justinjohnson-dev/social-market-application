@@ -19,7 +19,7 @@ class User extends Component {
     // get our form data out of state
     const { name } = this.state;
 
-    axios.post('http://localhost:5000/api/name', { name })
+    axios.post('/api/name', { name })
       .then((result) => {
         //access the results here....
       });
