@@ -30,15 +30,19 @@ app.use((req, res, next) => {
 });
 
 // db conn
-const uri = process.env.MONGODB_URI;
+
 const server_uri = config.db;
-if (uri === null) {
-  console.log('mongo connecting on web server');
-  connect(server_uri);
-} else {
-  console.log('connected to local atlas cluster!')
-  connect(uri);
-}
+connect(server_uri);
+
+// const uri = process.env.MONGODB_URI;
+// const server_uri = config.db;
+// if (uri === null) {
+//   console.log('mongo connecting on web server');
+//   connect(server_uri);
+// } else {
+//   console.log('connected to local atlas cluster!')
+//   connect(uri);
+// }
 
 mongoose.connection.on('connected', () => {
   console.log('Mongoose is connected to atlas instance!');
