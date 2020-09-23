@@ -10,3 +10,5 @@ Application where users can create accounts and share posts of local farms and s
 ## For running just the client code
 
 #### `cd client` -> `npm start`
+
+Link to code deployed to an ubuntu ec2 web server: [Home Grown](http://www.homegrownsocialapp.com/)
