@@ -30,7 +30,6 @@ app.use((req, res, next) => {
 });
 
 // db conn
-
 const server_uri = config.db;
 connect(server_uri);
 
