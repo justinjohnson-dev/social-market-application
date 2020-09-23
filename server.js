@@ -30,19 +30,9 @@ app.use((req, res, next) => {
 });
 
 // db conn
-
 const server_uri = config.db;
-connect(server_uri);
-
-// const uri = process.env.MONGODB_URI;
-// const server_uri = config.db;
-// if (uri === null) {
-//   console.log('mongo connecting on web server');
-//   connect(server_uri);
-// } else {
-//   console.log('connected to local atlas cluster!')
-//   connect(uri);
-// }
+const connectionOptions = { useCreateIndex: true, useNewUrlParser: true, useUnifiedTopology: true, useFindAndModify: false };
+mongoose.connect(process.env.MONGODB_URI || server_uri, connectionOptions);
 
 mongoose.connection.on('connected', () => {
   console.log('Mongoose is connected to atlas instance!');
@@ -65,10 +55,3 @@ const port = process.env.NODE_ENV === 'production' ? (process.env.PORT || 80) : 
 const server = app.listen(port, function () {
     console.log('Server listening on port ' + port);
 });
-
-function connect(current_env) {
-  mongoose.connect(current_env, {
-      useNewUrlParser: true,
-      useUnifiedTopology: true
-  });
-}
