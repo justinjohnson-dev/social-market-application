@@ -12,6 +12,9 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.use(cors());
 
+// import db config
+const config = require('./config/config');
+
 // set static folder
 app.use(express.static("client/build"));
 
@@ -28,10 +31,14 @@ app.use((req, res, next) => {
 
 // db conn
 const uri = process.env.MONGODB_URI;
-mongoose.connect(uri, {
-  useNewUrlParser: true,
-  useUnifiedTopology: true
-});
+const server_uri = config.db;
+if (uri === null) {
+  console.log('mongo connecting on web server');
+  connect(server_uri);
+} else {
+  console.log('connected to local atlas cluster!')
+  connect(uri);
+}
 
 mongoose.connection.on('connected', () => {
   console.log('Mongoose is connected to atlas instance!');
@@ -54,3 +61,10 @@ const port = process.env.NODE_ENV === 'production' ? (process.env.PORT || 80) : 
 const server = app.listen(port, function () {
     console.log('Server listening on port ' + port);
 });
+
+function connect(current_env) {
+  mongoose.connect(current_env, {
+      useNewUrlParser: true,
+      useUnifiedTopology: true
+  });
+}
