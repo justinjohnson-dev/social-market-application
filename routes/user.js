@@ -6,7 +6,7 @@ const config = require('config');
 const jwt = require('jsonwebtoken');
 
 // route for registering users
-router.post('/', (req, res) => {
+router.post('/signup', (req, res) => {
     const { name, email, password } = req.body;
 
     // send user error if they miss a field
