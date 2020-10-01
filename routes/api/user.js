@@ -21,7 +21,7 @@ router.post("/signup", (req, res) => {
 
     User.findOne({ email }).then(user => {
         if (user) {
-            return res.status(400).json({ email: "Email already exists" });
+            return res.status(400).json({ email: "Email Already Exists" });
         } else {
             const newUser = new User({
                 name,
@@ -43,43 +43,6 @@ router.post("/signup", (req, res) => {
         }
     });
 });
-
-
-// route for registering users
-// router.post('/signup', (req, res) => {
-//     const { name, email, password } = req.body;
-//     const { errors, isValid } = validateSignUpInput(req.body);
-//     // Check validation
-//     if (!isValid) {
-//         return res.status(400).json(errors);
-//     }
-
-//     // check for existing user
-//     User.findOne({ email })
-//         .then(user => {
-//             if (user) return res.status(400).json({ msg: 'user already exists' });
-
-//             // new user object
-//             const newUser = new User({
-//                 name,
-//                 email,
-//                 password
-//             });
-
-//             // generate a salt for a hash
-//             bcrypt.genSalt(10, (err, salt) => {
-//                 bcrypt.hash(newUser.password, salt, (err, hash) => {
-//                     if (err) throw err;
-//                     newUser.password = hash;
-//                     newUser
-//                         .save()
-//                         .then(user => res.json(user))
-//                         .catch(err => console.log(err));
-//                 });
-//             });
-
-//         });
-// });
 
 
 // @route POST api/users/login
@@ -126,7 +89,7 @@ router.post("/signin", (req, res) => {
             } else {
                 return res
                     .status(400)
-                    .json({ passwordincorrect: "Password incorrect" });
+                    .json({ passwordincorrect: "Password Incorrect" });
             }
         });
     });
