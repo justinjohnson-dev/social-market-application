@@ -3,24 +3,49 @@ import './App.css';
 import Home from './components/home/home';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import { Provider } from 'react-redux';
-import { loadUser } from './components/actions/authActions';
+import jwt_decode from 'jwt-decode';
+import setAuthToken from './components/utils/setAuthToken';
+import { setCurrentUser, logoutUser } from './components/actions/authActions';
 import store from './store';
 import Login from './components/signin/signin';
 import Signup from './components/signup/signup';
+import Navigation from './components/navigation/navigation';
+import PrivateRoute from './components/private-route/privateroute';
+import Dashboard from './components/dashboard/dashboard';
+
+// Check for token to keep user logged in
+if (localStorage.jwtToken) {
+  // Set auth token header auth
+  const token = localStorage.jwtToken;
+  setAuthToken(token);
+  // Decode token and get user info and exp
+  const decoded = jwt_decode(token);
+  // Set user and isAuthenticated
+  store.dispatch(setCurrentUser(decoded));
+  // Check for expired token
+  const currentTime = Date.now() / 1000; // to get in milliseconds
+  if (decoded.exp < currentTime) {
+    // Logout user
+    store.dispatch(logoutUser());
+    // Redirect to login
+    window.location.href = "./signin";
+  }
+}
 
 class App extends Component {
-  componentDidMount() {
-    store.dispatch(loadUser());
-  }
   render() {
     return (
       <Provider store={store}>
         <Router>
-          <Switch>
-            <Route path="/" exact component={Home} />
-            <Route path="/signup" exact component={Signup} />
-            <Route path="/signin" exact component={Login} />
-          </Switch>
+          <div className="App">
+            <Navigation />
+            <Route exact path="/" component={Home} />
+            <Route exact path="/signup" component={Signup} />
+            <Route exact path="/signin" component={Login} />
+            <Switch>
+              <PrivateRoute exact path="/dashboard" component={Dashboard} />
+            </Switch>
+          </div>
         </Router>
       </Provider>
     );

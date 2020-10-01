@@ -1,15 +1,23 @@
-import React from 'react';
-import './home.css';
+import React, { Component } from "react";
+import { Link } from "react-router-dom";
 
-class Home extends React.Component {
+class Home extends Component {
     render() {
-        return(
-            <div className="home-page">
-                <h1>HomeGrown</h1>
-                <h2 className="override-main-div">Hi, this is a test home page</h2>
+        return (
+            <div style={{ height: "75vh" }} className="container valign-wrapper">
+                <div className="row">
+                    <div className="col s12 center-align">
+                        <div className="col s6">
+                            <Link to="/signup" className="btn btn-large waves-effect waves-light hoverable dark-green accent-3">SignUp</Link>
+                        </div>
+                        <div className="col s6">
+                            <Link to="/signin" className="btn btn-large btn-flat waves-effect white black-text">Login</Link>
+                        </div>
+                    </div>
+                </div>
             </div>
         );
-    }   
+    }
 }
 
 export default Home;
