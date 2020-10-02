@@ -2,25 +2,17 @@
 const mongoose = require('mongoose');
 const morgan = require('morgan');
 const cookieParser = require('cookie-parser');
+const passport = require("passport");
 const cors = require('cors');
-const bodyParser = require('body-parser');
 const path = require("path");
 require("dotenv").config();
 
 const app = express();
-app.use(bodyParser.urlencoded({ extended: false }));
-app.use(bodyParser.json());
+app.use(express.json());
 app.use(cors());
 
 // import db config
 const config = require('./config/config');
-
-// set static folder
-app.use(express.static("client/build"));
-
-app.get("*", (req, res) => {
-  res.sendFile(path.resolve(__dirname, "client", "build", "index.html"));
-});
 
 // handles cores issues from different domains
 app.use((req, res, next) => {
@@ -39,19 +31,37 @@ mongoose.connection.on('connected', () => {
 });
 
 // import routes
-const userRoutes = require('./routes/user');
+const userRoutes = require('./routes/api/user');
+// const authRoutes = require('./routes/api/auth');
 
 // middlewares
 app.use(morgan('dev'));
-app.use(bodyParser.json());
 app.use(cookieParser());
 app.use(cors());
 
+// Passport middleware
+app.use(passport.initialize());
+// Passport config
+require("./config/passport")(passport);
+
 // routes middleware
-app.use("/api", userRoutes);
+app.use("/api/users", userRoutes);
+// app.use("/api/auth", authRoutes);
+
+// Serve static assets if in production
+if (process.env.NODE_ENV === 'local') {
+  console.log('local');
+} else {
+  // Set static folder
+  app.use(express.static('client/build'));
+
+  app.get('*', (req, res) => {
+    res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'));
+  });
+}
 
 // start server
 const port = process.env.NODE_ENV === 'production' ? (process.env.PORT || 80) : 5000;
 const server = app.listen(port, function () {
-    console.log('Server listening on port ' + port);
+  console.log('Server listening on port ' + port);
 });

@@ -1,0 +1,27 @@
+form {
+    margin: 125px auto;
+    padding: 20px;
+    width: 30%;
+    background-color:white;
+    border-style: groove;
+}
+
+.login-banners {
+    padding-bottom: 20px;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+}
+
+.form-group {
+    width: 50%;
+    margin: 0px auto;
+    padding: 10px;
+}
+
+.button-styles {
+    padding: 10px;
+}
+
+.fa-user-plus {
+    font-size: 18px;
+    color:rgb(39,164,156);
+}
