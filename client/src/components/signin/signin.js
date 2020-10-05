@@ -52,7 +52,7 @@ class Login extends Component {
     const { errors } = this.state;
     return (
       <form noValidate className="signup-form" onSubmit={this.onSubmit}>
-        <h5 className='login-alert login-banners'>Sign In <i class="fas fa-sign-in-alt"></i></h5>
+        <h5 className='login-alert login-banners'>Sign In <i className="fas fa-sign-in-alt"></i></h5>
         <div className="form-group">
           <label htmlFor="email" className="text-muted name-label">Email</label>
           <input
