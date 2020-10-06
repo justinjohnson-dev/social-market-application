@@ -14,6 +14,7 @@ class Home extends Component {
                             <Link to="/signin" className="btn btn-large btn-flat waves-effect white black-text">Login</Link>
                         </div>
                     </div>
+                    <h3>This is a Test</h3>
                 </div>
             </div>
         );
