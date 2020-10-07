@@ -1,10 +1,12 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
+import './home.css';
+import { red } from "color-name";
 
 class Home extends Component {
     render() {
         return (
-            <div style={{ height: "75vh" }} className="container valign-wrapper">
+            <div style={{ height: "75vh", background: "whitesmoke", 'margin-top': "20%" }} className="container valign-wrapper">
                 <div className="row">
                     <div className="col s12 center-align">
                         <div className="col s4">
