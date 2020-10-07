@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import './home.css';
-import { red } from "color-name";
 
 class Home extends Component {
     render() {
