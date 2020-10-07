@@ -1,11 +1,10 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
-import './landing.css';
 
-class Home extends Component {
+class Landing extends Component {
     render() {
         return (
-            <div style={{ height: "75vh" }} className="container valign-wrapper">
+            <div style={{ height: "75vh", background:"whitesmoke", 'margin-top': "20%"}} className="container valign-wrapper">
                 <div className="row">
                     <div className="col s12 center-align">
                         <div className="col s6">
@@ -21,4 +20,4 @@ class Home extends Component {
     }
 }
 
-export default Home;
+export default Landing;
