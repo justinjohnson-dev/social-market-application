@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import './App.css';
-import Home from './components/home/home';
+import Landing from './components/landing-page/landing';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import jwt_decode from 'jwt-decode';
@@ -41,7 +41,7 @@ class App extends Component {
         <Router>
           <div className="App">
             <Navigation />
-            <Route exact path="/" component={Home} />
+            <Route exact path="/" component={Landing} />
             <Route exact path="/signup" component={Signup} />
             <Route exact path="/signin" component={Login} />
             <Route exact path="/JoinChat" component={JoinChat} />
