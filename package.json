@@ -1,5 +1,6 @@
 {
   "name": "social-market-application",
+  "homepage": ".",
   "version": "1.0.0",
   "engines": {
     "node": "10.x",
@@ -35,10 +36,14 @@
     "morgan": "^1.10.0",
     "passport": "^0.4.1",
     "passport-jwt": "^4.0.0",
+    "redux": "^4.0.5",
     "rootpath": "^0.1.2",
+    "save": "^2.4.0",
+    "socket.io": "^2.3.0",
     "validator": "^13.1.17"
   },
   "devDependencies": {
+    "html-webpack-plugin": "^4.5.0",
     "nodemon": "^2.0.4"
   }
 }

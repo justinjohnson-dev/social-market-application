@@ -12,6 +12,8 @@ import Signup from './components/signup/signup';
 import Navigation from './components/navigation/navigation';
 import PrivateRoute from './components/private-route/privateroute';
 import Dashboard from './components/dashboard/dashboard';
+import JoinChat from './components/chat/JoinChat/JoinChat';
+import Chat from './components/chat/Chat';
 
 // Check for token to keep user logged in
 if (localStorage.jwtToken) {
@@ -42,6 +44,8 @@ class App extends Component {
             <Route exact path="/" component={Landing} />
             <Route exact path="/signup" component={Signup} />
             <Route exact path="/signin" component={Login} />
+            <Route exact path="/JoinChat" component={JoinChat} />
+            <Route exact path="/chat" component={Chat} />
             <Switch>
               <PrivateRoute exact path="/dashboard" component={Dashboard} />
             </Switch>
