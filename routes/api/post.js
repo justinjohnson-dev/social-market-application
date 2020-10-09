@@ -2,7 +2,7 @@ const express = require("express");
 const router = express.Router();
 const formidable = require('formidable');
 const fs = require('fs');
-// Load User model
+// Load Post model
 const Post = require("../../models/post");
 
 
