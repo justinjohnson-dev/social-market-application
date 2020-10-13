@@ -20,6 +20,18 @@ export const registerUser = (userData, history) => dispatch => {
         );
 };
 
+// create post
+export const createPost = (postData, history) => dispatch => {
+    axios
+        .post("http://localhost:5000/api/posts/createpost", postData)
+        .catch(err =>
+            dispatch({
+                type: GET_ERRORS,
+                payload: err.response.data
+            })
+        );
+};
+
 // Login - get user token
 export const loginUser = userData => dispatch => {
     axios

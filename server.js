@@ -113,8 +113,5 @@ io.on('connect', (socket) => {
       io.to(user.roomName).emit('roomUsers', { room: user.roomName, users: getUsersInRoom(user.roomName) });
 
     }
-
-
   });
-
 });

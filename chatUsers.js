@@ -55,6 +55,4 @@ const getUser = (id) => {
 
 }
 
-
-
 module.exports = { addUserToChat, removeUserFromChat, getUser, getUsersInRoom };
