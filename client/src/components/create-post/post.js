@@ -1,10 +1,8 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-import { withRouter } from "react-router-dom";
 import { connect } from "react-redux";
 import { createPost } from "../actions/authActions";
 import './post.css';
-
 
 
 class Post extends Component {
@@ -13,6 +11,7 @@ class Post extends Component {
     this.state = {
       description: "",
       location: "",
+      photo: "",
       farmer: "",
       errors: {}
     };
@@ -30,18 +29,38 @@ class Post extends Component {
     this.setState({ [e.target.id]: e.target.value });
   };
 
+  // function to put the file in state
+  fileChange = e => {
+    this.setState({
+      photo: e.target.files[0]
+    });
+  }
+
   onSubmit = e => {
     e.preventDefault();
-    const newPost = {
-      description: this.state.description,
-      location: this.state.location,
-      farmer: this.state.farmer
-    };
-    this.props.createPost(newPost, this.props.history);
+
+    // create form as we are using the formidable package on backend
+    let formData = new FormData();
+
+    console.log(this.state.photo)
+    console.log(this.state.location)
+    // add data from state to form
+    formData.append('description', this.state.description);
+    formData.append('location', this.state.location);
+    formData.append('photo', this.state.photo, this.state.photo.name);
+    formData.append('farmer', this.state.farmer);
+    console.log(formData)
+
+    // this was a test without redux first
+    // axios.post("/api/posts/createpost", formData)
+    //   .then(res => {
+    //     console.log(res)
+    //   })
+
+    this.props.createPost(formData);
   };
 
   render() {
-    const { errors } = this.state;
     return (
       <form onSubmit={this.onSubmit}>
         <div>
@@ -51,6 +70,11 @@ class Post extends Component {
         <div>
           <label>location</label>
           <input type="text" id="location" onChange={this.onChange} value={this.state.location}></input>
+        </div>
+        <div className="form-group">
+          <label className="btn btn-secondary">
+            <input id="photo" onChange={this.fileChange} type='file' name='photo' />
+          </label>
         </div>
         <div>
           <label>Farmer</label>
@@ -79,4 +103,4 @@ const mapStateToProps = state => ({
 export default connect(
   mapStateToProps,
   { createPost }
-)(withRouter(Post));
+)(Post);

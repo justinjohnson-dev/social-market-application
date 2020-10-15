@@ -21,9 +21,9 @@ export const registerUser = (userData, history) => dispatch => {
 };
 
 // create post
-export const createPost = (postData, history) => dispatch => {
+export const createPost = userPost => dispatch => {
     axios
-        .post("http://localhost:5000/api/posts/createpost", postData)
+        .post("/api/posts/createpost", userPost)
         .catch(err =>
             dispatch({
                 type: GET_ERRORS,

@@ -13,6 +13,10 @@ const postSchema = new Schema({
         required: true,
         maxlength: 500
     },
+    photo: {
+        data: Buffer,
+        contentType: String
+    },
     farmer: {
         type: String,
         maxlength: 32

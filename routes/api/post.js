@@ -18,8 +18,11 @@ router.post("/createpost", (req, res) => {
             });
         }
 
+        console.log(fields);
+        console.log(files.photo);
+
         // Check to make sure all fields are filled out
-        const { description, location, farmer } = fields
+        const { description, location, photo, farmer } = fields
         if (!description || !location || !farmer) {
             return res.status(400).json({
                 error: "All fields are required"
@@ -27,8 +30,12 @@ router.post("/createpost", (req, res) => {
         }
 
         let post = new Post(fields)
+        console.log(fields)
 
         // Need to pass in what you name image
+        console.log("files photo: ")
+        console.log(photo)
+
         if (files.photo) {
             // 1mb = 1000000
             if (files.photo.size > 1000000) {
@@ -53,6 +60,5 @@ router.post("/createpost", (req, res) => {
         });
     });
 });
-
 
 module.exports = router;
