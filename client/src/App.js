@@ -15,6 +15,9 @@ import Dashboard from './components/dashboard/dashboard';
 import JoinChat from './components/chat/JoinChat/JoinChat';
 import Chat from './components/chat/Chat';
 
+
+
+
 // Check for token to keep user logged in
 if (localStorage.jwtToken) {
   // Set auth token header auth
@@ -37,6 +40,7 @@ if (localStorage.jwtToken) {
 class App extends Component {
   render() {
     return (
+      
       <Provider store={store}>
         <Router>
           <div className="App">
@@ -52,6 +56,7 @@ class App extends Component {
           </div>
         </Router>
       </Provider>
+  
     );
   }
 }
