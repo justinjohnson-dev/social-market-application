@@ -1,0 +1,24 @@
+.photo-div, .farmer-div {
+    margin-bottom: 5%;
+}
+
+.photo-button {
+    margin-left: 18%;
+    color: rgb(39,164,156);
+}
+
+.description-label {
+    margin-right: 2%;
+}
+
+.location-label {
+    margin-right: 7%;
+}
+
+.farmer-label {
+    margin-right: 9%;
+}
+
+.location-div, .farmer-div {
+    margin-top: 5%;
+}

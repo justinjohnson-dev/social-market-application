@@ -38,51 +38,40 @@ class Post extends Component {
 
   onSubmit = e => {
     e.preventDefault();
-
     // create form as we are using the formidable package on backend
     let formData = new FormData();
-
-    console.log(this.state.photo)
-    console.log(this.state.location)
     // add data from state to form
     formData.append('description', this.state.description);
     formData.append('location', this.state.location);
     formData.append('photo', this.state.photo, this.state.photo.name);
     formData.append('farmer', this.state.farmer);
     console.log(formData)
-
-    // this was a test without redux first
-    // axios.post("/api/posts/createpost", formData)
-    //   .then(res => {
-    //     console.log(res)
-    //   })
-
     this.props.createPost(formData);
   };
 
   render() {
     return (
       <form onSubmit={this.onSubmit}>
-        <div>
-          <label>description</label>
-          <input type="text" id="description" onChange={this.onChange} value={this.state.description}></input>
-        </div>
-        <div>
-          <label>location</label>
-          <input type="text" id="location" onChange={this.onChange} value={this.state.location}></input>
-        </div>
-        <div className="form-group">
-          <label className="btn btn-secondary">
-            <input id="photo" onChange={this.fileChange} type='file' name='photo' />
+        <div className="photo-div">
+          <label className="photo-style">
+            <input className="photo-button" id="photo" onChange={this.fileChange} type='file' name='photo' />
           </label>
         </div>
-        <div>
-          <label>Farmer</label>
-          <input type="text" id="farmer" onChange={this.onChange} value={this.state.farmer}></input>
+        <div className="description-div">
+          <label className="description-label">Description</label>
+          <input className="description-input" type="textbox" id="description" onChange={this.onChange} value={this.state.description}></input>
+        </div>
+        <div className="location-div">
+          <label className="location-label">Location</label>
+          <input type="textbox" id="location" onChange={this.onChange} value={this.state.location}></input>
+        </div>
+        <div className="farmer-div">
+          <label className="farmer-label">Farmer</label>
+          <input type="textbox" id="farmer" onChange={this.onChange} value={this.state.farmer}></input>
         </div>
         <button
           type="submit"
-          className="btn btn-small waves-effect waves-light hoverable dark-green accent-3">submit
+          className="btn btn-small waves-effect waves-light hoverable dark-green accent-3">Create Post
         </button>
       </form>
     );
