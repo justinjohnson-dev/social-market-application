@@ -31,6 +31,26 @@ class Navigation extends Component {
           <h4 className="app-name"><i className="fas fa-seedling"></i> Home Grown Social App</h4>
         </div>
         <div className="center"></div>
+        <>
+      
+        <Box component="nav">
+            <AppBar position="static" style={{background: "#679459"}}>
+            <Toolbar>
+                <IconButton onClick={toggleSlider("right", true)}>
+                <ArrowBack style={{color: "#222"}} />
+                </IconButton>
+                <Typography variant="h5" style={{color: "#F3E2C0"}}>Welcome To HomeGrown</Typography>
+                <MobileRightMenuSlider
+                anchor="right"
+                open={state.right}
+                >
+                    {sideList("right")}
+
+                </MobileRightMenuSlider>
+            </Toolbar>
+        </AppBar>
+    </Box> 
+    </>
 
         {this.checkToken() === true &&
           <div className="login-user right">
