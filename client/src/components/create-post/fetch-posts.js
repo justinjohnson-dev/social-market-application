@@ -1,20 +1,17 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import './dashboard.css';
 
 
 class getPost extends Component {
-    onLogoutClick = e => {
-        e.preventDefault();
-        this.props.logoutUser();
-    };
     render() {
-        const { user } = this.props.auth;
+        const { post } = this.props.post;
         return (
-            <div className="container valign-wrapper">
+            <div className="main-container">
+                <h2 className="mb-4 title home-page-title-styling">User Posts</h2>
                 <div className="row">
-                    
+                    // will figure out how to get post into the card
+                    <Card key={index} post={post} />
                 </div>
             </div>
         );
@@ -31,5 +28,5 @@ const mapStateToProps = state => ({
 
 export default connect(
     mapStateToProps,
-    {  }
+    {}
 )(getPost);

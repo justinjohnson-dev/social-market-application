@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { createPost } from "../actions/authActions";
+import classnames from "classnames";
 import './post.css';
 
 
@@ -36,6 +37,12 @@ class Post extends Component {
     });
   }
 
+  validateFile() {
+    if (this.state.photo !== '') {
+      return true;
+    }
+  }
+
   onSubmit = e => {
     e.preventDefault();
     // create form as we are using the formidable package on backend
@@ -43,31 +50,73 @@ class Post extends Component {
     // add data from state to form
     formData.append('description', this.state.description);
     formData.append('location', this.state.location);
-    formData.append('photo', this.state.photo, this.state.photo.name);
+    let validated = this.validateFile();
+    if (validated === true) {
+      formData.append('photo', this.state.photo);
+    }
     formData.append('farmer', this.state.farmer);
-    console.log(formData)
+
     this.props.createPost(formData);
   };
 
   render() {
+    const { errors } = this.state;
     return (
-      <form onSubmit={this.onSubmit}>
+      <form noValidate onSubmit={this.onSubmit}>
         <div className="photo-div">
           <label className="photo-style">
-            <input className="photo-button" id="photo" onChange={this.fileChange} type='file' name='photo' />
+            <input
+              onChange={this.fileChange}
+              error={errors.photo}
+              type='file'
+              name='photo'
+              id="photo"
+              className={classnames("", {
+                invalid: errors.photo
+              })}
+            />
           </label>
+          <span className="red-text">{errors.photo}</span>
         </div>
         <div className="description-div">
           <label className="description-label">Description</label>
-          <input className="description-input" type="textbox" id="description" onChange={this.onChange} value={this.state.description}></input>
+          <input
+            onChange={this.onChange}
+            error={errors.description}
+            value={this.state.description}
+            type="textbox"
+            id="description"
+            className={classnames("", {
+              invalid: errors.description
+            })}
+          />
+          <span className="red-text">{errors.description}</span>
         </div>
         <div className="location-div">
           <label className="location-label">Location</label>
-          <input type="textbox" id="location" onChange={this.onChange} value={this.state.location}></input>
+          <input
+            onChange={this.onChange}
+            error={errors.location}
+            value={this.state.location}
+            type="textbox" id="location"
+            className={classnames("", {
+              invalid: errors.location
+            })}
+          />
+          <span className="red-text">{errors.location}</span>
         </div>
         <div className="farmer-div">
           <label className="farmer-label">Farmer</label>
-          <input type="textbox" id="farmer" onChange={this.onChange} value={this.state.farmer}></input>
+          <input
+            onChange={this.onChange}
+            error={errors.farmer}
+            value={this.state.farmer}
+            type="textbox" id="farmer"
+            className={classnames("", {
+              invalid: errors.farmer
+            })}
+          />
+          <span className="red-text">{errors.farmer}</span>
         </div>
         <button
           type="submit"

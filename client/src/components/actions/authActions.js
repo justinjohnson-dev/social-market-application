@@ -21,7 +21,7 @@ export const registerUser = (userData, history) => dispatch => {
 };
 
 // create post
-export const createPost = userPost => dispatch => {
+export const createPost = (userPost, history) => dispatch => {
     axios
         .post("/api/posts/createpost", userPost)
         .catch(err =>

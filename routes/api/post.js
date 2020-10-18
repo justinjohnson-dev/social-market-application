@@ -4,7 +4,7 @@ const formidable = require('formidable');
 const fs = require('fs');
 // Load Post model
 const Post = require("../../models/post");
-
+const validatePostInput = require("../../validation/post")
 
 router.post("/createpost", (req, res) => {
     // using the formidable package to handle
@@ -12,6 +12,16 @@ router.post("/createpost", (req, res) => {
     let form = new formidable.IncomingForm()
     form.keepExtensions = true
     form.parse(req, (err, fields, files) => {
+        // Form validation
+        const { errors, isValid } = validatePostInput(fields, files);
+        console.log(fields);
+        console.log(files);
+
+        // Check validation
+        if (!isValid) {
+            return res.status(400).json(errors);
+        }
+
         if (err) {
             return res.status(400).json({
                 error: "Image could not be uploaded"
@@ -25,6 +35,8 @@ router.post("/createpost", (req, res) => {
                 error: "All fields are required"
             });
         }
+
+        console.log(fields);
 
         let post = new Post(fields)
         if (files.photo) {
@@ -52,5 +64,12 @@ router.post("/createpost", (req, res) => {
     });
 });
 
+
+// basic get request for fetching user posts
+// will be updated as the we progress
+router.get("/getPost", (req, res) => {
+    Post.findOne()
+        .then(post => res.json(post));
+});
 
 module.exports = router;
