@@ -4,7 +4,10 @@ import jwt_decode from "jwt-decode";
 import {
     GET_ERRORS,
     SET_CURRENT_USER,
-    USER_LOADING
+    USER_LOADING,
+    FETCH_USERS_REQUEST,
+    FETCH_USERS_SUCCESS,
+    FETCH_USERS_FAILURE
 } from "./types";
 
 // Register User
@@ -12,18 +15,6 @@ export const registerUser = (userData, history) => dispatch => {
     axios
         .post("/api/users/signup", userData)
         .then(res => history.push("/signin")) // re-direct to login on successful register
-        .catch(err =>
-            dispatch({
-                type: GET_ERRORS,
-                payload: err.response.data
-            })
-        );
-};
-
-// create post
-export const createPost = (userPost, history) => dispatch => {
-    axios
-        .post("/api/posts/createpost", userPost)
         .catch(err =>
             dispatch({
                 type: GET_ERRORS,
