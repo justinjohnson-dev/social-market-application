@@ -9,6 +9,7 @@ import {
     ListItemText,
     ListItemIcon,
     Avatar,
+    Grid,
     Divider,
     List,
     Typography,
@@ -18,9 +19,12 @@ import {
     ArrowBack,
     PersonAdd,
     Home,
-    Lock
+    Lock,
+    Chat
 } from "@material-ui/icons";
-import avatar from '../avatar.png';
+import avatar from './avatar.png';
+import Header from './Header.js';
+import { Link} from "react-router-dom";
 
 //CSS Styles
 const useStyles = makeStyles(theme=>({
@@ -44,15 +48,23 @@ const useStyles = makeStyles(theme=>({
 const menuItems = [
     {
         listIcon: <Home/>,
-        listText: "Home"
+        listText: "Home",
+        listPath: "/"
     },
     {
         listIcon: <PersonAdd/>,
-        listText: "SignUp"
+        listText: "SignUp",
+        listPath: "/signup"
     },
     {
         listIcon: <Lock/>,
-        listText: "LogIn"
+        listText: "SignIn",
+        listPath: "/signin"
+    },
+    {
+        listIcon: <Chat/>,
+        listText: "Chat Room",
+        listPath: "/chat"
     }
    
 ]
@@ -70,12 +82,13 @@ const Navbar = () => {
     const sideList = slider => (
 <Box className={classes.menuSliderContainer} component="div"
 onClick={toggleSlider(slider, false)}>
+   
           <Avatar className={classes.avatar} src={avatar} alt="HomeGrown Logo" />
           <Divider />
           <List>
               {menuItems.map((lsItem, key)=>(
 
-              <ListItem button key>
+              <ListItem button key={key} component={Link} to={lsItem.listPath}>
                   <ListItemIcon className={classes.listItem}>
                       {lsItem.listIcon}
 
@@ -94,8 +107,11 @@ onClick={toggleSlider(slider, false)}>
             <Toolbar>
                 <IconButton onClick={toggleSlider("right", true)}>
                 <ArrowBack style={{color: "#222"}} />
+                <Grid container justify="center"><Avatar className={classes.avatar}  src={avatar} alt="HomeGrown Logo" />
+        </Grid>
                 </IconButton>
-                <Typography variant="h5" style={{color: "#F3E2C0"}}>Welcome To HomeGrown</Typography>
+                
+                
                 <MobileRightMenuSlider
                 anchor="right"
                 open={state.right}
