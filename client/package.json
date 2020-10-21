@@ -12,6 +12,7 @@
     "axios": "^0.20.0",
     "bootstrap": "^4.5.2",
     "classnames": "^2.2.6",
+    "image-to-base64": "^2.1.1",
     "is-empty": "^1.2.0",
     "jwt-decode": "^3.0.0-beta.2",
     "prop-types": "^15.7.2",
