@@ -13,10 +13,11 @@ import PrivateRoute from './components/private-route/privateroute';
 import Dashboard from './components/dashboard/dashboard';
 import JoinChat from './components/chat/JoinChat/JoinChat';
 import Chat from './components/chat/Chat';
-import post from './components/create-post/post';
-import getPost from './components/create-post/fetch-posts';
+import post from './components/createPost/post';
+import getPost from './components/createPost/fetchPost';
 import Header from './components/header/Header';
 import Navbar from './components/header/Navbar';
+import Home from './components/home/home';
 
 
 // Check for token to keep user logged in
@@ -45,9 +46,8 @@ class App extends Component {
         <Router>
           <Navbar />
           <Header />
-
           <Navigation />
-          <Route exact path="/" />
+          <Route exact path="/" component={Home} />
           <Route exact path="/signup" component={Signup} />
           <Route exact path="/signin" component={Login} />
           <Route exact path="/JoinChat" component={JoinChat} />

@@ -6,7 +6,7 @@ import Card from './postCard'
 import './post.css';
 
 
-class getPost extends Component {
+class GetPost extends Component {
     constructor() {
         super();
         this.state = {
@@ -48,7 +48,7 @@ class getPost extends Component {
 }
 
 // if we convert to redux implementation 
-getPost.propTypes = {
+GetPost.propTypes = {
     auth: PropTypes.object.isRequired,
     errors: PropTypes.object.isRequired
 };
@@ -61,4 +61,4 @@ const mapStateToProps = state => ({
 export default connect(
     mapStateToProps,
     {}
-)(getPost);
+)(GetPost);
