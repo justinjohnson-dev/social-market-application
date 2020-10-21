@@ -67,49 +67,49 @@ const server = app.listen(port, function () {
 });
 
 
-//move to different file and export server for io sockets
-const { addUserToChat, removeUserFromChat, getUser, getUsersInRoom } = require('./chatUsers.js');
+// //move to different file and export server for io sockets
+// const { addUserToChat, removeUserFromChat, getUser, getUsersInRoom } = require('./chatUsers.js');
 
-const io = socketio(server);
+// const io = socketio(server);
 
-io.on('connect', (socket) => {
+// io.on('connect', (socket) => {
 
-  socket.on('join', ({ userName, roomName }, callback) => {
-    const { error, user } = addUserToChat({ id: socket.id, userName, roomName });
+//   socket.on('join', ({ userName, roomName }, callback) => {
+//     const { error, user } = addUserToChat({ id: socket.id, userName, roomName });
 
-    if (error) return callback(error);
+//     if (error) return callback(error);
 
-    socket.emit('message', { user: 'admin', text: `${user.userName}, thanks for stopping by chatroom ${user.roomName}.` });
-    socket.broadcast.to.apply(user.roomName).emit('message', { user: 'admin', text: `${user.userName} has joined!` });
+//     socket.emit('message', { user: 'admin', text: `${user.userName}, thanks for stopping by chatroom ${user.roomName}.` });
+//     socket.broadcast.to.apply(user.roomName).emit('message', { user: 'admin', text: `${user.userName} has joined!` });
 
-    socket.join(user.roomName);
+//     socket.join(user.roomName);
 
-    io.to(user.roomName).emit('roomUsers', { room: user.roomName, users: getUsersInRoom(user.roomName) })
+//     io.to(user.roomName).emit('roomUsers', { room: user.roomName, users: getUsersInRoom(user.roomName) })
 
-    callback();
+//     callback();
 
-  });
+//   });
 
-  socket.on('sendMessage', (message, callback) => {
+//   socket.on('sendMessage', (message, callback) => {
 
-    const user = getUser(socket.id);
+//     const user = getUser(socket.id);
 
-    io.to(user.roomName).emit('message', { user: user.userName, text: message });
+//     io.to(user.roomName).emit('message', { user: user.userName, text: message });
 
-    callback();
+//     callback();
 
-  });
+//   });
 
-  socket.on('disconnect', () => {
+//   socket.on('disconnect', () => {
 
-    const user = removeUserFromChat(socket.id);
+//     const user = removeUserFromChat(socket.id);
 
-    if (user) {
+//     if (user) {
 
-      io.to(user.roomName).emit('message', { user: 'admin', text: `${user.userName} has left the room.` });
+//       io.to(user.roomName).emit('message', { user: 'admin', text: `${user.userName} has left the room.` });
 
-      io.to(user.roomName).emit('roomUsers', { room: user.roomName, users: getUsersInRoom(user.roomName) });
+//       io.to(user.roomName).emit('roomUsers', { room: user.roomName, users: getUsersInRoom(user.roomName) });
 
-    }
-  });
-});
+//     }
+//   });
+// });
