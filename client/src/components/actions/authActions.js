@@ -4,10 +4,7 @@ import jwt_decode from "jwt-decode";
 import {
     GET_ERRORS,
     SET_CURRENT_USER,
-    USER_LOADING,
-    FETCH_USERS_REQUEST,
-    FETCH_USERS_SUCCESS,
-    FETCH_USERS_FAILURE
+    USER_LOADING
 } from "./types";
 
 // Register User

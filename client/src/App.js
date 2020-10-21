@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import './App.css';
+import Landing from './components/landing-page/landing';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import jwt_decode from 'jwt-decode';
@@ -13,11 +14,10 @@ import PrivateRoute from './components/private-route/privateroute';
 import Dashboard from './components/dashboard/dashboard';
 import JoinChat from './components/chat/JoinChat/JoinChat';
 import Chat from './components/chat/Chat';
-import post from './components/createPost/post';
-import getPost from './components/createPost/fetchPost';
 import Header from './components/header/Header';
 import Navbar from './components/header/Navbar';
-import Home from './components/home/home';
+
+
 
 
 // Check for token to keep user logged in
@@ -42,23 +42,28 @@ if (localStorage.jwtToken) {
 class App extends Component {
   render() {
     return (
-      <Provider store={store}>
+      
+     
+         
+         <Provider store={store}>
         <Router>
           <Navbar />
-          <Header />
+        <Header />
+        
           <Navigation />
-          <Route exact path="/" component={Home} />
-          <Route exact path="/signup" component={Signup} />
-          <Route exact path="/signin" component={Login} />
-          <Route exact path="/JoinChat" component={JoinChat} />
-          <Route exact path="/chat" component={Chat} />
-          <Route exact path="/getPost" component={getPost} />
-          <Switch>
-            <PrivateRoute exact path="/dashboard" component={Dashboard} />
-            <PrivateRoute exact path="/post" component={post} />
-          </Switch>
+          <Route exact path="/" />
+            <Route exact path="/signup" component={Signup} />
+            <Route exact path="/signin" component={Login} />
+            <Route exact path="/JoinChat" component={JoinChat} />
+            <Route exact path="/chat" component={Chat} />
+            
+            <Switch>
+              <PrivateRoute exact path="/dashboard" component={Dashboard} />
+            </Switch>
+            
         </Router>
       </Provider>
+  
     );
   }
 }
