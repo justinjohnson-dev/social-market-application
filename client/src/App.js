@@ -14,6 +14,11 @@ import PrivateRoute from './components/private-route/privateroute';
 import Dashboard from './components/dashboard/dashboard';
 import JoinChat from './components/chat/JoinChat/JoinChat';
 import Chat from './components/chat/Chat';
+import Header from './components/header/Header';
+import Navbar from './components/header/Navbar';
+
+
+
 
 // Check for token to keep user logged in
 if (localStorage.jwtToken) {
@@ -37,21 +42,28 @@ if (localStorage.jwtToken) {
 class App extends Component {
   render() {
     return (
-      <Provider store={store}>
+      
+     
+         
+         <Provider store={store}>
         <Router>
-          <div className="App">
-            <Navigation />
-            <Route exact path="/" component={Landing} />
+          <Navbar />
+        <Header />
+        
+          <Navigation />
+          <Route exact path="/" />
             <Route exact path="/signup" component={Signup} />
             <Route exact path="/signin" component={Login} />
             <Route exact path="/JoinChat" component={JoinChat} />
             <Route exact path="/chat" component={Chat} />
+            
             <Switch>
               <PrivateRoute exact path="/dashboard" component={Dashboard} />
             </Switch>
-          </div>
+            
         </Router>
       </Provider>
+  
     );
   }
 }

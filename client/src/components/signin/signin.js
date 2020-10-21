@@ -87,14 +87,10 @@ class Login extends Component {
             {errors.passwordincorrect}
           </span>
         </div>
-        <div className="col s8 button-styles">
-          <Link to="/" className="btn-flat waves-effect">
-            <i className="material-icons left">keyboard_backspace</i> Back to
-            home
-          </Link>
+        <div>
           <button
             type="submit"
-            className="btn btn-small waves-effect waves-light hoverable dark-green accent-3">Login
+            className="btn btn-small waves-effect waves-light hoverable dark-green accent-3">Sign In
           </button>
           <p className="grey-text text-darken-1">
             Don't have an account? <Link to="/signup">Sign Up</Link>
