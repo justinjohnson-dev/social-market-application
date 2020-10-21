@@ -1,58 +1,64 @@
-import React, { Component, useEffect } from "react";
-import axios from 'axios';
+import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import { fetchPost } from "../actions/postAction";
+import { getPosts } from './postApi'
+import Card from './postCard'
+import './post.css';
 
 
 class getPost extends Component {
-    constructor(props) {
-        super(props);
+    constructor() {
+        super();
         this.state = {
-            post: [],
-            photo: '',
-            loading: true,
+            loadPosts: [],
+            error: false,
             errors: {}
         };
     }
 
-    async componentDidMount() {
-        // trying with a fetch
-        const url = "api/posts/getPost";
-        const response = await fetch(url);
+    componentDidMount() {
+        // FETCH data
+        this.loadPostsByCreatedAt();
+    }
 
-        // get data
-        const data = await response.json();
-        console.log(data)
-        
-        this.setState({ post: data, loading:false })
-        console.log(this.state.post.description)
+    loadPostsByCreatedAt() {
+        getPosts('createdAt').then(data => {
+            if (data.error) {
+                this.setState({
+                    error: data.error
+                });
+            } else {
+                this.setState({
+                    loadPosts: data
+                });
+            }
+        });
     }
 
     render() {
-        const { post } = this.state.post;
         return (
             <div className="main-container">
                 <h2 className="mb-4 title home-page-title-styling">User Posts</h2>
-                <div>
-                    {this.state.loading ? <div>loading...</div> : <div> <div>{this.state.post.location}</div> <img src={this.state.post.photo.data} /></div>}
+                <div className="row">
+                    {this.state.loadPosts.map((post, index) => (<Card key={index} post={post} />))}
                 </div>
             </div>
         );
     }
 }
 
-
+// if we convert to redux implementation 
 getPost.propTypes = {
-    auth: PropTypes.object.isRequired
+    auth: PropTypes.object.isRequired,
+    errors: PropTypes.object.isRequired
 };
 
 const mapStateToProps = state => ({
     auth: state.auth,
-    postData: state.post
+    errors: state.errors
 });
 
 export default connect(
     mapStateToProps,
-    { fetchPost }
+    {}
 )(getPost);

@@ -5,7 +5,6 @@ const cookieParser = require('cookie-parser');
 const passport = require("passport");
 const cors = require('cors');
 const path = require("path");
-const http = require('http');
 const socketio = require('socket.io');
 require("dotenv").config();
 const app = express();

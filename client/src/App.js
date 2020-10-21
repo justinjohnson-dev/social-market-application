@@ -48,10 +48,10 @@ class App extends Component {
             <Route exact path="/signin" component={Login} />
             <Route exact path="/JoinChat" component={JoinChat} />
             <Route exact path="/chat" component={Chat} />
+            <Route exact path="/getPost" component={getPost} />
             <Switch>
               <PrivateRoute exact path="/dashboard" component={Dashboard} />
               <PrivateRoute exact path="/post" component={post} />
-              <PrivateRoute exact path="/getPost" component={getPost} />
             </Switch>
           </div>
         </Router>

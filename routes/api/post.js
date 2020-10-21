@@ -64,12 +64,66 @@ router.post("/createpost", (req, res) => {
     });
 });
 
+exports.productById = (req, res, next, id) => {
+    Post.findById(id).exec((err, post) => {
+        if (err || !post) {
+            return res.status(400).json({
+                error: "Post not found"
+            });
+        }
 
-// basic get request for fetching user posts
-// will be updated as the we progress
-router.get("/getPost", (req, res) => {
-    Post.findOne()
-        .then(post => res.json(post));
-});
+        req.post = post
+        next();
+    });
+};
+
+
+// Viewing any products photo, using the content-type we created in schema
+photo = (req, res, next) => {
+    console.log(req)
+    if (req.post.photo.data) {
+        res.set('Content-Type', req.post.photo.contentType);
+        return res.send(req.post.photo.data);
+    }
+    next();
+};
+
+list = (req, res) => {
+    let order = req.query.order ? req.query.order : 'asc';
+    let sortBy = req.query.sortBy ? req.query.sortBy : '_id';
+    // need to parse limit to an integer for query
+    let limit = req.query.limit ? parseInt(req.query.limit) : 10;
+    Post.find()
+        .select("-photo")
+        .sort([[sortBy, order]])
+        .limit(limit)
+        .exec((err, success) => {
+            if (err) {
+                return res.status(400).json({
+                    error: "Post is not found"
+                });
+            }
+            res.json(success);
+        });
+};
+
+postById = (req, res, next, id) => {
+    Post.findById(id).exec((err, post) => {
+        if (err || !post) {
+            return res.status(400).json({
+                error: "Post not found"
+            });
+        }
+
+        req.post = post
+        next();
+    });
+};
+
+// routes
+router.get('/posts/photo/:postId', photo)
+router.get('/posts', list);
+router.param('postId', postById);
+
 
 module.exports = router;

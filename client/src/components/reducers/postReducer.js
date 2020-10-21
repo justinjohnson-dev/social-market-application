@@ -25,6 +25,8 @@ const reducer = (state = initialState, action) => {
                 post: [],
                 error: action.payload
             }
+        case 'LOAD':
+            return action.post;
         default: return state
     }
 }

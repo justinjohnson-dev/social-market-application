@@ -35,6 +35,23 @@ export const fetchPost = () => {
     }
 }
 
+// TEST
+// export const loadPost = () => {
+//     return async (dispatch) => {
+//         try {
+//             const post = await axios.get("api/posts/getPost");
+//             dispatch(loadPosts(post.data));
+//         } catch (error) {
+//             console.log(error);
+//         }
+//     }
+// }
+
+// export const loadPosts = (post) => ({
+//     type: 'LOAD',
+//     post
+// });
+
 // fetch post request
 export const fetchPostRequest = () => {
     return {
