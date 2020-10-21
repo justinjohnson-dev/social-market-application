@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import './App.css';
-import Landing from './components/landing-page/landing';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import jwt_decode from 'jwt-decode';
@@ -16,6 +15,9 @@ import JoinChat from './components/chat/JoinChat/JoinChat';
 import Chat from './components/chat/Chat';
 import post from './components/create-post/post';
 import getPost from './components/create-post/fetch-posts';
+import Header from './components/header/Header';
+import Navbar from './components/header/Navbar';
+
 
 // Check for token to keep user logged in
 if (localStorage.jwtToken) {
@@ -41,19 +43,20 @@ class App extends Component {
     return (
       <Provider store={store}>
         <Router>
-          <div className="App">
-            <Navigation />
-            <Route exact path="/" component={Landing} />
-            <Route exact path="/signup" component={Signup} />
-            <Route exact path="/signin" component={Login} />
-            <Route exact path="/JoinChat" component={JoinChat} />
-            <Route exact path="/chat" component={Chat} />
-            <Route exact path="/getPost" component={getPost} />
-            <Switch>
-              <PrivateRoute exact path="/dashboard" component={Dashboard} />
-              <PrivateRoute exact path="/post" component={post} />
-            </Switch>
-          </div>
+          <Navbar />
+          <Header />
+
+          <Navigation />
+          <Route exact path="/" />
+          <Route exact path="/signup" component={Signup} />
+          <Route exact path="/signin" component={Login} />
+          <Route exact path="/JoinChat" component={JoinChat} />
+          <Route exact path="/chat" component={Chat} />
+          <Route exact path="/getPost" component={getPost} />
+          <Switch>
+            <PrivateRoute exact path="/dashboard" component={Dashboard} />
+            <PrivateRoute exact path="/post" component={post} />
+          </Switch>
         </Router>
       </Provider>
     );

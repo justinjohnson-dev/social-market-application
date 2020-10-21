@@ -19,6 +19,8 @@
   "author": "Team 4",
   "license": "ISC",
   "dependencies": {
+    "@material-ui/core": "^4.11.0",
+    "@material-ui/icons": "^4.9.1",
     "bcryptjs": "^2.4.3",
     "body-parser": "^1.19.0",
     "concurrently": "^5.3.0",
@@ -36,6 +38,7 @@
     "mongodb": "^3.5.9",
     "mongoose": "^5.10.7",
     "morgan": "^1.10.0",
+    "node": "^14.13.1",
     "passport": "^0.4.1",
     "passport-jwt": "^4.0.0",
     "redux": "^4.0.5",

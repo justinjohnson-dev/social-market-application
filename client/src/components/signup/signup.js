@@ -104,7 +104,7 @@ class Signup extends Component {
                         className="btn btn-small waves-effect waves-light hoverable dark-green accent-3">Sign up
                     </button>
                     <p className="grey-text text-darken-1">
-                        Already have an account? <Link to="/signin">Log in</Link>
+                        Already have an account? <Link to="/signin">Sign in</Link>
                     </p>
                 </div>
             </form>
