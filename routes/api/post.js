@@ -64,21 +64,7 @@ router.post("/createpost", (req, res) => {
     });
 });
 
-exports.productById = (req, res, next, id) => {
-    Post.findById(id).exec((err, post) => {
-        if (err || !post) {
-            return res.status(400).json({
-                error: "Post not found"
-            });
-        }
-
-        req.post = post
-        next();
-    });
-};
-
-
-// Viewing any products photo, using the content-type we created in schema
+// Viewing any posts photo, using the content-type we created in schema
 photo = (req, res, next) => {
     console.log(req)
     if (req.post.photo.data) {
