@@ -7,6 +7,7 @@ import classnames from "classnames";
 import './signup.css';
 
 
+
 class Signup extends Component {
     constructor() {
         super();
@@ -94,11 +95,8 @@ class Signup extends Component {
                     />
                     <span className="red-text">{errors.password}</span>
                 </div>
-                <div className="col s8 button-styles">
-                    <Link to="/" className="btn-flat waves-effect">
-                        <i className="material-icons left">keyboard_backspace</i> Back to
-                        home
-                    </Link>
+                <div>
+                  
                     <button
                         type="submit"
                         className="btn btn-small waves-effect waves-light hoverable dark-green accent-3">Sign up
