@@ -57,6 +57,7 @@ class Post extends Component {
     formData.append('farmer', this.state.farmer);
 
     this.props.createPost(formData);
+    this.props.history.push('/');
   };
 
   render() {
