@@ -5,10 +5,8 @@ const cookieParser = require('cookie-parser');
 const passport = require("passport");
 const cors = require('cors');
 const path = require("path");
-const http = require('http');
 const socketio = require('socket.io');
 require("dotenv").config();
-
 const app = express();
 app.use(express.json());
 app.use(cors());
@@ -34,7 +32,7 @@ mongoose.connection.on('connected', () => {
 
 // import routes
 const userRoutes = require('./routes/api/user');
-// const authRoutes = require('./routes/api/auth');
+const postRoutes = require('./routes/api/post');
 
 // middlewares
 app.use(morgan('dev'));
@@ -48,7 +46,7 @@ require("./config/passport")(passport);
 
 // routes middleware
 app.use("/api/users", userRoutes);
-// app.use("/api/auth", authRoutes);
+app.use("/api/posts", postRoutes);
 
 // Serve static assets if in production
 if (process.env.NODE_ENV === 'local') {
@@ -76,13 +74,13 @@ const io = socketio(server);
 
 io.on('connect', (socket) => {
 
-  socket.on('join', ({userName, roomName}, callback) => {
-    const {error, user} = addUserToChat({ id: socket.id, userName, roomName});
+  socket.on('join', ({ userName, roomName }, callback) => {
+    const { error, user } = addUserToChat({ id: socket.id, userName, roomName });
 
     if (error) return callback(error);
 
-    socket.emit('message', { user: 'admin', text: `${user.userName}, thanks for stopping by chatroom ${user.roomName}.`});
-    socket.broadcast.to.apply(user.roomName).emit('message', {user: 'admin', text: `${user.userName} has joined!`});
+    socket.emit('message', { user: 'admin', text: `${user.userName}, thanks for stopping by chatroom ${user.roomName}.` });
+    socket.broadcast.to.apply(user.roomName).emit('message', { user: 'admin', text: `${user.userName} has joined!` });
 
     socket.join(user.roomName);
 
@@ -96,7 +94,7 @@ io.on('connect', (socket) => {
 
     const user = getUser(socket.id);
 
-    io.to(user.roomName).emit('message', {user: user.userName, text: message });
+    io.to(user.roomName).emit('message', { user: user.userName, text: message });
 
     callback();
 
@@ -108,13 +106,10 @@ io.on('connect', (socket) => {
 
     if (user) {
 
-      io.to(user.roomName).emit('message', {user: 'admin', text: `${user.userName} has left the room.` });
+      io.to(user.roomName).emit('message', { user: 'admin', text: `${user.userName} has left the room.` });
 
-      io.to(user.roomName).emit('roomUsers', {room: user.roomName, users: getUsersInRoom(user.roomName)});
+      io.to(user.roomName).emit('roomUsers', { room: user.roomName, users: getUsersInRoom(user.roomName) });
 
     }
-
-
   });
-
 });
