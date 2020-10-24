@@ -80,7 +80,7 @@ class Post extends Component {
   render() {
     const { errors } = this.state;
     return (
-      <form noValidate onSubmit={this.onSubmit}>
+      <form noValidate onSubmit={this.onSubmit} className="post-form-style">
         <div className="photo-div">
           <label className="photo-style">
             <input

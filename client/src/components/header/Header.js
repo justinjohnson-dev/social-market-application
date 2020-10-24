@@ -5,7 +5,7 @@ import { connect } from "react-redux";
 import { makeStyles } from "@material-ui/core/styles";
 import { Typography, Avatar, Grid, Box } from "@material-ui/core";
 import Typed from 'react-typed';
-
+import './header.css'
 
 // CSS Styles
 const useStyles = makeStyles(theme => ({
