@@ -45,20 +45,22 @@ class App extends Component {
     return (
       <Provider store={store}>
         <Router>
-          <Navbar />
-          <Header />
-          <Navigation />
-          <Route exact path="/" component={Home} />
-          <Route exact path="/signup" component={Signup} />
-          <Route exact path="/signin" component={Login} />
-          <Route exact path="/JoinChat" component={JoinChat} />
-          <Route exact path="/chat" component={Chat} />
-          <Route exact path="/getPost" component={getPost} />
-          <Route exact path="/testt" component={tester} />
-          <Switch>
-            <PrivateRoute exact path="/dashboard" component={Dashboard} />
-            <PrivateRoute exact path="/post" component={post} />
-          </Switch>
+          <div className="App">
+            <Navbar />
+            <Header />
+            <Navigation />
+            <Route exact path="/" component={Home} />
+            <Route exact path="/signup" component={Signup} />
+            <Route exact path="/signin" component={Login} />
+            <Route exact path="/JoinChat" component={JoinChat} />
+            <Route exact path="/chat" component={Chat} />
+            <Route exact path="/getPost" component={getPost} />
+            <Route exact path="/testt" component={tester} />
+            <Switch>
+              <PrivateRoute exact path="/dashboard" component={Dashboard} />
+              <PrivateRoute exact path="/post" component={post} />
+            </Switch>
+          </div>
         </Router>
       </Provider>
     );
