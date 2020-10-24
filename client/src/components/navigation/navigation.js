@@ -3,19 +3,6 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { logoutUser } from "../actions/authActions";
 import './navigation.css';
-import {
-  AppBar,
-  Toolbar,
-  ListItem,
-  IconButton,
-  ListItemText,
-  ListItemIcon,
-  Avatar,
-  Divider,
-  List,
-  Typography,
-  Box
-} from "@material-ui/core";
 
 class Navigation extends Component {
 

@@ -14,8 +14,12 @@
     margin-right: 6%;
 }
 
-.location-div, .farmer-div {
+.location-div {
     margin-top: 5%;
+}
+
+.farmer-div {
+    margin-top: 15%;
 }
 
 .card {
