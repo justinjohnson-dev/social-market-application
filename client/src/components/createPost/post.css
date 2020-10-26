@@ -1,5 +1,5 @@
 .post-form-style {
-    width: 250px;
+    width: 300px;
 }
 
 .photo-div, .farmer-div {
@@ -51,7 +51,7 @@
 }
 
 .home-page-title-styling {
-    margin-top: 25px;
+    margin-top: 75px;
     padding: 5px;
     font-size: 25px;
     text-transform: uppercase;
