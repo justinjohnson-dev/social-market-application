@@ -12,7 +12,7 @@ const useStyles = makeStyles(theme => ({
 
     title: {
         textAlign: "top",
-        color: "#E9BD5E"
+        color: "#679459"
     },
     subtitle: {
         textAlign: "top",
@@ -58,7 +58,7 @@ const Header = () => {
             </Typography>
             {checkToken() === true &&
                 <div>
-                    <Link className="btn btn-small waves-effect waves-light hoverable dark-green accent-3" to="/post">Create New Post</Link>
+                    <Link className="btn btn-small button-color" to="/post">Create New Post</Link>
                 </div>
             }
         </Box>

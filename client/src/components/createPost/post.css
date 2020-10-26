@@ -33,11 +33,16 @@
 
 .post-name {
     font-weight: bold;
+    margin-bottom: 20px;
     padding: 10px;
+    background-color: #eee;
 }
 
 .post-description {
-    padding-bottom: 15px;
+    padding-bottom: 10px;
+    padding-top: 10px;
+    width: 75%;
+    margin: 0px auto;
 }
 
 .title {
@@ -51,3 +56,11 @@
     font-size: 25px;
     text-transform: uppercase;
 }
+
+.button-color {
+    background-color: rgb(196, 141, 41);
+}
+
+.button-color:hover {
+    background-color: rgb(218, 169, 79);
+  }

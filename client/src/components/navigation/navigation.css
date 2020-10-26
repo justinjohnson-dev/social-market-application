@@ -1,0 +1,27 @@
+.login-user, .logout-button {
+    position: absolute;
+    top: 12px;
+}
+
+.login-user {
+    right: 130px;
+    top: 10px;
+}
+
+.fa-user {
+    color: rgb(196, 141, 41);
+}
+
+.user {
+    font-size: 18px;
+    color: whitesmoke;
+}
+
+.logout-button {
+    background-color: rgb(196, 141, 41);
+    right: 5px;
+}
+
+.logout-button:hover {
+    background-color: rgb(218, 169, 79);
+}

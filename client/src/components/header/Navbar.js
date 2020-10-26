@@ -22,14 +22,13 @@ import {
     Lock,
     Chat
 } from "@material-ui/icons";
-import avatar from './avatar.png';
 import { Link } from "react-router-dom";
 
 //CSS Styles
 const useStyles = makeStyles(theme => ({
     menuSliderContainer: {
         width: 250,
-        background: "eee",
+        background: "whitesmoke",
         height: "100%"
     },
     avatar: {
@@ -82,7 +81,7 @@ const Navbar = () => {
         <Box className={classes.menuSliderContainer} component="div"
             onClick={toggleSlider(slider, false)}>
 
-            <Avatar className={classes.avatar} src={avatar} alt="HomeGrown Logo" />
+            <i class="fas fa-carrot carrot-override"></i>
             <Divider />
             <List>
                 {menuItems.map((lsItem, key) => (

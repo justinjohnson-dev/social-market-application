@@ -4,3 +4,10 @@
     margin: 0px auto;
     font-size: 50px;
 }
+
+.carrot-override {
+    color: rgb(196, 141, 41);
+    padding: 10px;
+    margin-left: 25%;
+    font-size: 100px;
+}

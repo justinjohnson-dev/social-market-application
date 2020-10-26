@@ -95,7 +95,7 @@ class Post extends Component {
               })}
             />
             <Fab
-              color="primary"
+              color="default"
               size="small"
               component="span"
               aria-label="add"
@@ -157,7 +157,7 @@ class Post extends Component {
           </FormControl>
           <p className="red-text">{errors.farmer}</p>
         </div>
-        <Button type="submit" variant="outlined" color="primary">
+        <Button type="submit" variant="outlined" className="button-color">
           Create Post
         </Button>
       </form>
