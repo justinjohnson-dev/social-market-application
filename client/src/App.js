@@ -11,13 +11,14 @@ import Signup from './components/signup/signup';
 import Navigation from './components/navigation/navigation';
 import PrivateRoute from './components/private-route/privateroute';
 import Dashboard from './components/dashboard/dashboard';
-import JoinChat from './components/chat/JoinChat/JoinChat';
-import Chat from './components/chat/Chat';
+import JoinChat from './components/Chat/JoinChat/JoinChat';
+import Chat from './components/Chat/Chat';
 import post from './components/createPost/post';
 import getPost from './components/createPost/fetchPost';
 import Header from './components/header/Header';
 import Navbar from './components/header/Navbar';
 import Home from './components/home/home';
+import tester from './components/signup/test';
 
 
 // Check for token to keep user logged in
@@ -44,19 +45,22 @@ class App extends Component {
     return (
       <Provider store={store}>
         <Router>
-          <Navbar />
-          <Header />
-          <Navigation />
-          <Route exact path="/" component={Home} />
-          <Route exact path="/signup" component={Signup} />
-          <Route exact path="/signin" component={Login} />
-          <Route exact path="/JoinChat" component={JoinChat} />
-          <Route exact path="/chat" component={Chat} />
-          <Route exact path="/getPost" component={getPost} />
-          <Switch>
-            <PrivateRoute exact path="/dashboard" component={Dashboard} />
-            <PrivateRoute exact path="/post" component={post} />
-          </Switch>
+          <div className="App">
+            <Navbar />
+            <Header />
+            <Navigation />
+            <Route exact path="/" component={Home} />
+            <Route exact path="/signup" component={Signup} />
+            <Route exact path="/signin" component={Login} />
+            <Route exact path="/JoinChat" component={JoinChat} />
+            <Route exact path="/chat" component={Chat} />
+            <Route exact path="/getPost" component={getPost} />
+            <Route exact path="/testt" component={tester} />
+            <Switch>
+              <PrivateRoute exact path="/dashboard" component={Dashboard} />
+              <PrivateRoute exact path="/post" component={post} />
+            </Switch>
+          </div>
         </Router>
       </Provider>
     );

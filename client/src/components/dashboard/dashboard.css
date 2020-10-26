@@ -1,4 +1,9 @@
 .hello-user {
-    margin-top:150px;
     font-family: 'Courier New', Courier, monospace;
+}
+
+.container {
+    background: none;
+    margin: 0px auto;
+    margin-top: 10%;
 }

@@ -3,6 +3,17 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { createPost } from "../actions/postAction";
 import classnames from "classnames";
+import { Fab, Button } from "@material-ui/core";
+import AddIcon from '@material-ui/icons/Add';
+import {
+  FormControl,
+  InputLabel,
+  FormLabel,
+  RadioGroup,
+  FormControlLabel,
+  Radio,
+  TextField
+} from "@material-ui/core";
 import './post.css';
 
 
@@ -13,7 +24,7 @@ class Post extends Component {
       description: "",
       location: "",
       photo: "",
-      farmer: "",
+      farmer: "Yes",
       errors: {}
     };
   }
@@ -29,6 +40,12 @@ class Post extends Component {
   onChange = e => {
     this.setState({ [e.target.id]: e.target.value });
   };
+
+  onRadioChange = e => {
+    this.setState({
+      farmer: e.currentTarget.value
+    });
+  }
 
   // function to put the file in state
   fileChange = e => {
@@ -63,10 +80,11 @@ class Post extends Component {
   render() {
     const { errors } = this.state;
     return (
-      <form noValidate onSubmit={this.onSubmit}>
+      <form noValidate onSubmit={this.onSubmit} className="post-form-style">
         <div className="photo-div">
           <label className="photo-style">
             <input
+              style={{ display: "none" }}
               onChange={this.fileChange}
               error={errors.photo}
               type='file'
@@ -76,53 +94,72 @@ class Post extends Component {
                 invalid: errors.photo
               })}
             />
+            <Fab
+              color="default"
+              size="small"
+              component="span"
+              aria-label="add"
+              variant="extended"
+            >
+              <AddIcon /> Upload photo
+            </Fab>
           </label>
-          <span className="red-text">{errors.photo}</span>
+          <p className="red-text">{errors.photo}</p>
         </div>
-        <div className="description-div">
-          <label className="description-label">Description</label>
-          <input
+        <div className="">
+          <TextField
             onChange={this.onChange}
             error={errors.description}
             value={this.state.description}
             type="textbox"
             id="description"
+            label="Description"
+            multiline
+            rows={4}
             className={classnames("", {
               invalid: errors.description
             })}
           />
-          <span className="red-text">{errors.description}</span>
+          <p className="red-text">{errors.description}</p>
         </div>
         <div className="location-div">
-          <label className="location-label">Location</label>
-          <input
+          <TextField
             onChange={this.onChange}
             error={errors.location}
             value={this.state.location}
-            type="textbox" id="location"
+            type="textbox"
+            id="location"
+            label="Location"
+            multiline
+            rows={1}
             className={classnames("", {
               invalid: errors.location
             })}
           />
-          <span className="red-text">{errors.location}</span>
+          <p className="red-text">{errors.location}</p>
         </div>
         <div className="farmer-div">
-          <label className="farmer-label">Farmer</label>
-          <input
-            onChange={this.onChange}
-            error={errors.farmer}
-            value={this.state.farmer}
-            type="textbox" id="farmer"
-            className={classnames("", {
-              invalid: errors.farmer
-            })}
-          />
-          <span className="red-text">{errors.farmer}</span>
+          <FormControl component="fieldset">
+            <FormLabel component="legend">Farmer</FormLabel>
+            <RadioGroup
+              aria-label="farmer"
+              id="farmer"
+              value={this.state.farmer}
+              onChange={this.onRadioChange}
+              error={errors.farmer}
+              style={{ "flex-direction": "row" }}
+              className={classnames("", {
+                invalid: errors.farmer
+              })}>
+              <FormControlLabel value="Yes" control={<Radio />} label="Yes" />
+              <FormControlLabel value="No" control={<Radio />} label="No" />
+            </RadioGroup>
+          </FormControl>
+          <p className="red-text">{errors.farmer}</p>
         </div>
-        <button
-          type="submit"
-          className="btn btn-small waves-effect waves-light hoverable dark-green accent-3">Create Post
-        </button>
+        <Button type="submit" variant="outlined" className="button-color">
+          Create Post
+        </Button>
       </form>
     );
   }

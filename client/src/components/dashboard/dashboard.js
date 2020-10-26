@@ -12,14 +12,10 @@ class Dashboard extends Component {
     render() {
         const { user } = this.props.auth;
         return (
-            <div className="container valign-wrapper">
-                <div className="row">
-                    <div className="col s12 center-align">
-                        <h4 className="hello-user">
-                            Hey there, {user.name}
-                        </h4>
-                    </div>
-                </div>
+            <div className="container">
+                <h4 className="hello-user">
+                    Hey there, {user.name}
+                </h4>
             </div>
         );
     }

@@ -17,6 +17,11 @@ form {
     padding: 10px;
 }
 
+.center-text {
+    border: solid;
+    margin: 0px auto;
+}
+
 .button-styles {
     padding: 10px;
 }

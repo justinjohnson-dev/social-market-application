@@ -1,34 +1,27 @@
-.app-name {
-    font-family: cursive;
-    text-align: left;
-    margin-left: 25px;
+.login-user, .logout-button {
+    position: absolute;
+    top: 12px;
 }
 
-.main {
-    display: flex;
+.login-user {
+    right: 130px;
+    top: 10px;
 }
 
-.fa-seedling {
-    color:rgb(39,164,156);
+.fa-user {
+    color: rgb(196, 141, 41);
 }
 
 .user {
-    margin-top:30px;
-    font-size: 20px;
+    font-size: 18px;
+    color: whitesmoke;
 }
 
 .logout-button {
-    margin: 12px 10px 0px 5px;
+    background-color: rgb(196, 141, 41);
+    right: 5px;
 }
 
-.left {
-    float:left;
-}
-
-.right {
-    float:right;
-}
-
-.center {
-    margin:0 auto;
+.logout-button:hover {
+    background-color: rgb(218, 169, 79);
 }
