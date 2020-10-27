@@ -4,6 +4,8 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { registerUser } from "../actions/authActions";
 import classnames from "classnames";
+import { Button } from "@material-ui/core";
+import TextField from '@material-ui/core/TextField';
 import './signup.css';
 
 
@@ -52,65 +54,67 @@ class Signup extends Component {
         return (
             <form noValidate onSubmit={this.onSubmit} className="signup-form">
                 <h5 className='login-alert login-banners'>Sign Up Below <i className="fas fa-user-plus"></i></h5>
-                <div className="form-group">
-                    <label className="text-muted name-label">Name</label>
-                    <input
+                <div className="name-div">
+                    <TextField
                         onChange={this.onChange}
-                        value={this.state.name}
                         error={errors.name}
-                        id="name"
+                        value={this.state.name}
                         type="text"
+                        id="name"
+                        label="Name"
                         className={classnames("", {
                             invalid: errors.name
                         })}
                     />
-                    <span className="red-text">{errors.name}</span>
+                    <p className="red-text">{errors.name}</p>
                 </div>
-                <div className="form-group">
-                    <label className="text-muted email-label">Email</label>
-                    <input
+                <div className="email-div">
+                    <TextField
                         onChange={this.onChange}
-                        value={this.state.email}
                         error={errors.email}
-                        id="email"
+                        value={this.state.email}
                         type="email"
+                        id="email"
+                        label="Email"
                         className={classnames("", {
                             invalid: errors.email
                         })}
                     />
-                    <span className="red-text">{errors.email}</span>
+                    <p className="red-text">{errors.email}</p>
                 </div>
-                <div className="form-group">
-                    <label htmlFor="password">Password</label>
-                    <input
+                <div className="password-div">
+                    <TextField
                         onChange={this.onChange}
-                        value={this.state.password}
                         error={errors.password}
-                        id="password"
+                        value={this.state.password}
+                        style={{ textDecoration: 'none' }}
                         type="password"
+                        id="password"
+                        label="Password"
                         className={classnames("", {
                             invalid: errors.password
                         })}
                     />
-                    <span className="red-text">{errors.password}</span>
+                    <p className="red-text">{errors.email}</p>
                 </div>
-                <div className="col s8 button-styles">
+                <div className="button-div">
                     <Link to="/" className="btn-flat waves-effect">
                         <i className="material-icons left">keyboard_backspace</i> Back to
                         home
                     </Link>
-                    <button
-                        type="submit"
-                        className="btn btn-small waves-effect waves-light hoverable dark-green accent-3">Sign up
-                    </button>
+                    <Button type="submit" variant="outlined" style={{ "background-color": "rgb(196, 141, 41)", "color": "white" }}>
+                        Sign up
+                    </Button>
                     <p className="grey-text text-darken-1">
-                        Already have an account? <Link to="/signin">Sign in</Link>
+                        Already have an account? <Link to="/signin">Sign In</Link>
                     </p>
                 </div>
             </form>
         );
     }
 }
+
+
 Signup.propTypes = {
     registerUser: PropTypes.func.isRequired,
     auth: PropTypes.object.isRequired,
