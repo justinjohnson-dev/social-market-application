@@ -4,6 +4,9 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { loginUser } from "../actions/authActions";
 import classnames from "classnames";
+import { Button } from "@material-ui/core";
+import TextField from '@material-ui/core/TextField';
+
 import './signin.css';
 
 
@@ -51,33 +54,33 @@ class Login extends Component {
   render() {
     const { errors } = this.state;
     return (
-      <form noValidate className="signup-form" onSubmit={this.onSubmit}>
+      <form noValidate className="" onSubmit={this.onSubmit}>
         <h5 className='login-alert login-banners'>Sign In <i className="fas fa-sign-in-alt"></i></h5>
-        <div className="form-group">
-          <label htmlFor="email" className="text-muted name-label">Email</label>
-          <input
+        <div className="email-div">
+          <TextField
             onChange={this.onChange}
-            value={this.state.email}
             error={errors.email}
-            id="email"
+            value={this.state.email}
             type="email"
+            id="email"
+            label="Email"
             className={classnames("", {
               invalid: errors.email || errors.emailnotfound
             })}
           />
-          <span className="red-text">
+          <p className="red-text">
             {errors.email}
             {errors.emailnotfound}
-          </span>
+          </p>
         </div>
-        <div className="form-group">
-          <label htmlFor="password">Password</label>
-          <input
+        <div className="password-div">
+          <TextField
             onChange={this.onChange}
-            value={this.state.password}
             error={errors.password}
-            id="password"
+            value={this.state.password}
             type="password"
+            id="password"
+            label="Password"
             className={classnames("", {
               invalid: errors.password || errors.passwordincorrect
             })}
@@ -87,11 +90,14 @@ class Login extends Component {
             {errors.passwordincorrect}
           </span>
         </div>
-        <div>
-          <button
-            type="submit"
-            className="btn btn-small waves-effect waves-light hoverable dark-green accent-3">Sign In
-          </button>
+        <div className="button-div">
+          <Link to="/" className="btn-flat waves-effect">
+            <i className="material-icons left">keyboard_backspace</i> Back to
+            home
+          </Link>
+          <Button type="submit" variant="outlined" style={{ "background-color": "rgb(196, 141, 41)", "color": "white"}}>
+            Sign In
+          </Button>
           <p className="grey-text text-darken-1">
             Don't have an account? <Link to="/signup">Sign Up</Link>
           </p>
@@ -100,6 +106,8 @@ class Login extends Component {
     );
   }
 }
+
+
 Login.propTypes = {
   loginUser: PropTypes.func.isRequired,
   auth: PropTypes.object.isRequired,

@@ -1,7 +1,7 @@
 form {
     margin: 125px auto;
-    padding: 20px;
-    width: 30%;
+    padding: 25px;
+    width: 20%;
     background-color:white;
     border-style: groove;
 }
@@ -28,5 +28,9 @@ form {
 
 .fa-user-plus {
     font-size: 18px;
-    color:rgb(39,164,156);
+    color:rgb(196, 141, 41);
+}
+
+.password-div, .name-div, .email-div {
+    margin: 0px auto;
 }
