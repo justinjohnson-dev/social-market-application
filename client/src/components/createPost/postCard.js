@@ -26,24 +26,24 @@ const Card = ({ post }) => {
                     <div className="card-body-styling">
                         <p className="post-description">{post.description}</p>
                     </div>
-                    {post.farmer === "Yes" &&
-                        <div className="highlight-div">
-                            <div className="highlight1">
-                                <ShowHighlight className='photo-size' item={post} url="posts" />
-                            </div>
-                            <div className="highlight2">
-                                <ShowHighlight2 className='photo-size' item={post} url="posts" />
-                            </div>
-                        </div>
-                    }
-                    {post.farmer === "Yes" &&
-                        <div className="purchase-button">
-                            <Button type="submit" variant="outlined" className="button-color">
-                                Purchase Item
-                            </Button>
-                        </div>
-                    }
                 </div>
+                {post.farmer === "Yes" &&
+                    <div className="card-footer highlight-div">
+                        <div className="highlight1">
+                            <ShowHighlight className='highlight-size' item={post} url="posts" />
+                        </div>
+                        <div className="highlight2">
+                            <ShowHighlight2 className='highlight-size' item={post} url="posts" />
+                        </div>
+                    </div>
+                }
+                {post.farmer === "Yes" &&
+                    <div className="card-footer purchase-button">
+                        <Button type="submit" variant="outlined" className="button-color">
+                            Purchase Item
+                    </Button>
+                    </div>
+                }
             </div>
         </div>
     )

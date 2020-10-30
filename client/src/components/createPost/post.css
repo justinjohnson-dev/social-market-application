@@ -33,8 +33,8 @@
 
 .post-name {
     font-weight: bold;
-    margin-bottom: 20px;
     padding: 10px;
+    padding-bottom: 20px;
     background-color: #eee;
 }
 
@@ -45,8 +45,8 @@
 }
 
 .post-description {
-    padding-bottom: 10px;
-    padding-top: 10px;
+    padding-bottom: 5%;
+    padding-top: 5%;
     width: 75%;
     margin: 0px auto;
 }
@@ -95,15 +95,27 @@
     display: flex;
     width: 75%;
     margin: 0px auto;
-    margin-bottom: 20px;
+    margin-bottom: 3%;
+    margin-top: 3%;
 }
 
 .highlight1, .highlight2 {
     flex-direction: row;
-    padding: 5px;
+    width: 50%;
+    margin: auto 0px;
+    padding: 10px;
 }
 
 .purchase-button {
     padding-bottom: 20px;
     margin: 0px auto;
+}
+
+.card-body {
+    background-color:white;
+    padding-top: 5%;
+}
+
+.card {
+    background-color: whitesmoke;
 }
