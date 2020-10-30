@@ -20,6 +20,14 @@ const postSchema = new Schema({
     farmer: {
         type: String,
         maxlength: 32
+    },
+    highlight1: {
+        data: Buffer,
+        contentType: String
+    },
+    highlight2: {
+        data: Buffer,
+        contentType: String
     }
 }, { timestamps: true }
 );

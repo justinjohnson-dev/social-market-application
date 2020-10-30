@@ -33,14 +33,20 @@
 
 .post-name {
     font-weight: bold;
-    margin-bottom: 20px;
     padding: 10px;
+    padding-bottom: 20px;
     background-color: #eee;
 }
 
+.hello {
+    padding:0px;
+    margin-left: 0px;
+    margin-bottom: 0px;
+}
+
 .post-description {
-    padding-bottom: 10px;
-    padding-top: 10px;
+    padding-bottom: 5%;
+    padding-top: 5%;
     width: 75%;
     margin: 0px auto;
 }
@@ -63,4 +69,53 @@
 
 .button-color:hover {
     background-color: rgb(218, 169, 79);
-  }
+}
+
+.highlight-photo {
+    flex-direction: "row";
+    font-size: 10px;
+    margin: 0px auto;
+    margin-bottom: 20px;
+}
+
+.extra {
+    display: flex;
+    width: 50%;
+    margin: 0px auto;
+}
+
+.fa-star {
+    padding-top: 10px;
+    padding-left: 10px;
+    float: left;
+    color: rgb(196, 141, 41);
+}
+
+.highlight-div {
+    display: flex;
+    width: 75%;
+    margin: 0px auto;
+    margin-bottom: 3%;
+    margin-top: 3%;
+}
+
+.highlight1, .highlight2 {
+    flex-direction: row;
+    width: 50%;
+    margin: auto 0px;
+    padding: 10px;
+}
+
+.purchase-button {
+    padding-bottom: 20px;
+    margin: 0px auto;
+}
+
+.card-body {
+    background-color:white;
+    padding-top: 5%;
+}
+
+.card {
+    background-color: whitesmoke;
+}

@@ -24,7 +24,9 @@ class Post extends Component {
       description: "",
       location: "",
       photo: "",
-      farmer: "Yes",
+      farmer: "No",
+      highlight1: "",
+      highlight2: "",
       errors: {}
     };
   }
@@ -53,9 +55,20 @@ class Post extends Component {
       photo: e.target.files[0]
     });
   }
+  fileChangeHighlight = e => {
+    this.setState({
+      highlight1: e.target.files[0]
+    });
+  }
+  fileChangeHighlight2 = e => {
+    this.setState({
+      highlight2: e.target.files[0]
+    });
+  }
 
   validateFile() {
     if (this.state.photo !== '') {
+      console.log(this.state.photo)
       return true;
     }
   }
@@ -70,6 +83,10 @@ class Post extends Component {
     let validated = this.validateFile();
     if (validated === true) {
       formData.append('photo', this.state.photo);
+      if (this.state.highlight1 !== "") {
+        formData.append('highlight1', this.state.highlight1);
+        formData.append('highlight2', this.state.highlight2);
+      }
     }
     formData.append('farmer', this.state.farmer);
 
@@ -156,6 +173,63 @@ class Post extends Component {
             </RadioGroup>
           </FormControl>
           <p className="red-text">{errors.farmer}</p>
+        </div>
+        {this.state.farmer === "Yes" &&
+          <p>Highlight up to two images for users to look through!</p>
+        }
+        <div className="extra">
+          {this.state.farmer === "Yes" &&
+            <div className="highlight-photo">
+              <label className="photo-style">
+                <input
+                  style={{ display: "none" }}
+                  onChange={this.fileChangeHighlight}
+                  error={errors.photo}
+                  type='file'
+                  name='highlight1'
+                  id="highlight1"
+                  className={classnames("", {
+                    invalid: errors.photo
+                  })}
+                />
+                <Fab
+                  color="default"
+                  size="small"
+                  component="span"
+                  aria-label="add"
+                  variant="extended"
+                >
+                  <AddIcon />
+                </Fab>
+              </label>
+            </div>
+          }
+          {this.state.farmer === "Yes" &&
+            <div className="highlight-photo">
+              <label className="photo-style">
+                <input
+                  style={{ display: "none" }}
+                  onChange={this.fileChangeHighlight2}
+                  error={errors.photo}
+                  type='file'
+                  name='highlight2'
+                  id="highlight2"
+                  className={classnames("", {
+                    invalid: errors.photo
+                  })}
+                />
+                <Fab
+                  color="default"
+                  size="small"
+                  component="span"
+                  aria-label="add"
+                  variant="extended"
+                >
+                  <AddIcon />
+                </Fab>
+              </label>
+            </div>
+          }
         </div>
         <Button type="submit" variant="outlined" className="button-color">
           Create Post

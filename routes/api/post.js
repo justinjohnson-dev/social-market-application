@@ -14,7 +14,6 @@ router.post("/createpost", (req, res) => {
     form.parse(req, (err, fields, files) => {
         // Form validation
         const { errors, isValid } = validatePostInput(fields, files);
-        console.log(fields);
         console.log(files);
 
         // Check validation
@@ -36,8 +35,6 @@ router.post("/createpost", (req, res) => {
             });
         }
 
-        console.log(fields);
-
         let post = new Post(fields)
         if (files.photo) {
             // 3mb = 3000000
@@ -50,6 +47,16 @@ router.post("/createpost", (req, res) => {
             // using file system to read data
             post.photo.data = fs.readFileSync(files.photo.path)
             post.photo.contentType = files.photo.type
+        }
+
+        if (files.highlight1) {
+            post.highlight1.data = fs.readFileSync(files.highlight1.path)
+            post.highlight1.contentType = files.highlight1.type
+        }
+
+        if (files.highlight2) {
+            post.highlight2.data = fs.readFileSync(files.highlight2.path)
+            post.highlight2.contentType = files.highlight2.type
         }
 
         // Save the new post
@@ -66,10 +73,25 @@ router.post("/createpost", (req, res) => {
 
 // Viewing any posts photo, using the content-type we created in schema
 photo = (req, res, next) => {
-    console.log(req)
     if (req.post.photo.data) {
         res.set('Content-Type', req.post.photo.contentType);
         return res.send(req.post.photo.data);
+    }
+    next();
+};
+
+photoHighlight = (req, res, next) => {
+    if (req.post.highlight1.data) {
+        res.set('Content-Type', req.post.highlight1.contentType);
+        return res.send(req.post.highlight1.data);
+    }
+    next();
+};
+
+photoHighlight2 = (req, res, next) => {
+    if (req.post.highlight2.data) {
+        res.set('Content-Type', req.post.highlight2.contentType);
+        return res.send(req.post.highlight2.data);
     }
     next();
 };
@@ -108,6 +130,8 @@ postById = (req, res, next, id) => {
 
 // routes
 router.get('/posts/photo/:postId', photo)
+router.get('/posts/highlight/:postId', photoHighlight)
+router.get('/posts/highlight2/:postId', photoHighlight2)
 router.get('/posts', list);
 router.param('postId', postById);
 
