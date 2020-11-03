@@ -69,24 +69,3 @@ export default connect(
     mapStateToProps,
     {}
 )(Purchase);
-
-
-// <div className="location-div">
-// <TextField
-//     onChange={this.onChange}
-//     error={errors.location}
-//     value={this.state.location}
-//     type="textbox"
-//     id="location"
-//     label="Location"
-//     multiline
-//     rows={1}
-//     className={classnames("", {
-//         invalid: errors.location
-//     })}
-// />
-// <p className="red-text">{errors.location}</p>
-// </div>
-// <Button type="submit" variant="outlined" className="button-color">
-// Create Post
-// </Button>
