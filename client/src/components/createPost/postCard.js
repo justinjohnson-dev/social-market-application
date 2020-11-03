@@ -1,8 +1,11 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
+import PropTypes from "prop-types";
+import { connect } from "react-redux";
 import ShowImage from './showImage';
 import ShowHighlight from './showHighlight';
 import ShowHighlight2 from './showHighlight2';
-import { Fab, Button } from "@material-ui/core";
+import { Button } from "@material-ui/core";
 import './post.css';
 
 
@@ -39,14 +42,32 @@ const Card = ({ post }) => {
                 }
                 {post.farmer === "Yes" &&
                     <div className="card-footer purchase-button">
+                        <p>{post.farmerId}</p>
                         <Button type="submit" variant="outlined" className="button-color">
-                            Purchase Item
-                    </Button>
+                            <Link to={{
+                                pathname: "/purchase",
+                                state: {
+                                    post: post.farmerId
+                                }
+                            }}>Purchase Product</Link>
+                        </Button>
                     </div>
                 }
             </div>
         </div>
-    )
+    );
 }
 
-export default Card;
+
+Card.propTypes = {
+    auth: PropTypes.object.isRequired
+};
+
+const mapStateToProps = state => ({
+    auth: state.auth
+});
+
+export default connect(
+    mapStateToProps,
+    {}
+)(Card);

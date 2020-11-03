@@ -27,6 +27,7 @@ class Post extends Component {
       farmer: "No",
       highlight1: "",
       highlight2: "",
+      farmerId: "",
       errors: {}
     };
   }
@@ -73,6 +74,11 @@ class Post extends Component {
     }
   }
 
+  findFarmerEmail = () => {
+    const user = this.props.auth;
+    return user.user.id;
+  }
+
   onSubmit = e => {
     e.preventDefault();
     // create form as we are using the formidable package on backend
@@ -86,6 +92,10 @@ class Post extends Component {
       if (this.state.highlight1 !== "") {
         formData.append('highlight1', this.state.highlight1);
         formData.append('highlight2', this.state.highlight2);
+        // find farmers email to save in mongo
+        // will be tied to orders later on
+        const farmerID = this.findFarmerEmail();
+        formData.append('farmerId', farmerID);
       }
     }
     formData.append('farmer', this.state.farmer);

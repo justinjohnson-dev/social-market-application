@@ -28,6 +28,10 @@ const postSchema = new Schema({
     highlight2: {
         data: Buffer,
         contentType: String
+    },
+    farmerId: {
+        type: String,
+        trim: true
     }
 }, { timestamps: true }
 );
