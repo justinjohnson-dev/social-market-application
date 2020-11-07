@@ -62,8 +62,6 @@ const Header = () => {
                 </div>
             }
         </Box>
-
-
     );
 };
 

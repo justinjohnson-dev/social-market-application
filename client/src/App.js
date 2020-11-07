@@ -19,6 +19,7 @@ import Header from './components/header/Header';
 import Navbar from './components/header/Navbar';
 import Home from './components/home/home';
 import tester from './components/signup/test';
+import purchase from './components/purchaseScreen/purchase';
 
 
 // Check for token to keep user logged in
@@ -59,6 +60,7 @@ class App extends Component {
             <Switch>
               <PrivateRoute exact path="/dashboard" component={Dashboard} />
               <PrivateRoute exact path="/post" component={post} />
+              <PrivateRoute exact path="/purchase" component={purchase} />
             </Switch>
           </div>
         </Router>

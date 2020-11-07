@@ -95,4 +95,23 @@ router.post("/signin", (req, res) => {
     });
 });
 
+router.get('/users', async (req, res) => {
+    try {
+        const users = await User.find();
+        res.json(users);
+    } catch (err) {
+        res.json({ message: "Error" })
+    }
+});
+
+router.get('/user/:userId', async (req, res) => {
+    try {
+        const farmer = await User.findById(req.params.userId);
+        res.json(farmer);
+    } catch (err) {
+        res.json({ message: "No user found" });
+    }
+});
+
+
 module.exports = router;
