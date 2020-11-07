@@ -42,15 +42,12 @@ const Card = ({ post }) => {
                 }
                 {post.farmer === "Yes" &&
                     <div className="card-footer purchase-button">
-                        <p>{post.farmerId}</p>
-                        <Button type="submit" variant="outlined" className="button-color">
-                            <Link to={{
-                                pathname: "/purchase",
-                                state: {
-                                    post: post.farmerId
-                                }
-                            }}>Purchase Product</Link>
-                        </Button>
+                        <Link className="btn btn-small button-color" to={{
+                            pathname: "/purchase",
+                            state: {
+                                post: post.farmerId
+                            }
+                        }}>Purchase Product</Link>
                     </div>
                 }
             </div>
