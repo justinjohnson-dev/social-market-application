@@ -5,7 +5,6 @@ import { connect } from "react-redux";
 import ShowImage from './showImage';
 import ShowHighlight from './showHighlight';
 import ShowHighlight2 from './showHighlight2';
-import { Button } from "@material-ui/core";
 import './post.css';
 
 
@@ -45,7 +44,7 @@ const Card = ({ post }) => {
                         <Link className="btn btn-small button-color" to={{
                             pathname: "/purchase",
                             state: {
-                                post: post.farmerId
+                                post: post
                             }
                         }}>Purchase Product</Link>
                     </div>
