@@ -1,32 +1,27 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
+import { createOrder } from "../actions/orderAction";
 import classnames from "classnames";
 import ShowHighlight from '../createPost/showHighlight';
-import { Fab, Button } from "@material-ui/core";
-import AddIcon from '@material-ui/icons/Add';
+import ShowHighlight2 from "../createPost/showHighlight2";
+import { Button } from "@material-ui/core";
 import {
-    FormControl,
-    InputLabel,
-    FormLabel,
-    RadioGroup,
-    FormControlLabel,
-    Radio,
     TextField
 } from "@material-ui/core";
 import './purchase.css';
 import { getUser } from './purchaseApi'
-import ShowHighlight2 from "../createPost/showHighlight2";
 import './purchase.css'
 
 class Purchase extends Component {
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
         this.state = {
             loadUser: [],
+            userId: this.props.auth.user.id,
+            farmerId: '',
             items: '',
             quantity: '',
-            error: false,
             errors: {}
         };
     }
@@ -55,8 +50,21 @@ class Purchase extends Component {
         this.setState({ [e.target.id]: e.target.value });
     };
 
+    onSubmit = e => {
+        e.preventDefault();
+        // create form as we are using the formidable package on backend
+        let formData = new FormData();
+
+        // add data from state to form
+        formData.append('items', this.state.items);
+        formData.append('quantity', this.state.quantity);
+        formData.append('userId', this.state.userId);
+        formData.append('farmerId', this.state.loadUser._id)
+
+        this.props.createOrder(formData);
+    };
+
     render() {
-        const { user } = this.props.auth;
         const { post } = this.props.location.state;
         const { errors } = this.state;
         return (
@@ -106,20 +114,26 @@ class Purchase extends Component {
                     />
                     <p className="red-text">{errors.quantity}</p>
                 </div>
+                <Button type="submit" variant="outlined" className="button-color">
+                    Create Order
+                </Button>
             </form>
         );
     }
 }
 
 Purchase.propTypes = {
-    auth: PropTypes.object.isRequired
+    createOrder: PropTypes.func.isRequired,
+    auth: PropTypes.object.isRequired,
+    errors: PropTypes.object.isRequired
 };
 
 const mapStateToProps = state => ({
-    auth: state.auth
+    auth: state.auth,
+    errors: state.errors
 });
 
 export default connect(
     mapStateToProps,
-    {}
+    { createOrder }
 )(Purchase);
