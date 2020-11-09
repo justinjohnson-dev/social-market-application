@@ -29,7 +29,7 @@ router.post("/createorder", (req, res) => {
 
         let order = new Order(fields)
         
-        // Save the new post
+        // Save the new order
         order.save((err, success) => {
             if (err) {
                 return res.status(400).json({
