@@ -28,4 +28,34 @@
 .quantity-div {
     margin: 0px auto;
     width: 60%;
+}.order-form {
+    width: 40%;
+    border: none;
+}
+
+.product-div {
+    display: flex;
+    width: 100%;
+    height: 50px;
+    margin: 0px auto;
+    margin-bottom: 3%;
+    margin-top: 3%;
+}
+
+.product1, .product2 {
+    flex-direction: row;
+    width: 75%;
+    margin: auto 0px;
+    padding: 5px;
+}
+
+.item-div {
+    margin: 0px auto;
+    margin-top: 30%;
+    width: 60%;
+}
+
+.quantity-div {
+    margin: 0px auto;
+    width: 60%;
 }
