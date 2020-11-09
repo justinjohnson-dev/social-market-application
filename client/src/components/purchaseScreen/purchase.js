@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import axios from 'axios';
 import classnames from "classnames";
 import ShowHighlight from '../createPost/showHighlight';
 import { Fab, Button } from "@material-ui/core";

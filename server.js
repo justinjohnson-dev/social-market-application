@@ -33,6 +33,7 @@ mongoose.connection.on('connected', () => {
 // import routes
 const userRoutes = require('./routes/api/user');
 const postRoutes = require('./routes/api/post');
+const orderRoutes = require('./routes/api/order');
 
 // middlewares
 app.use(morgan('dev'));
@@ -47,6 +48,7 @@ require("./config/passport")(passport);
 // routes middleware
 app.use("/api/users", userRoutes);
 app.use("/api/posts", postRoutes);
+app.use("/api/orders", orderRoutes);
 
 // Serve static assets if in production
 if (process.env.NODE_ENV === 'local') {
