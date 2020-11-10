@@ -50,5 +50,44 @@ router.get('/orders', async (req, res) => {
     }
 });
 
+orderByFarmerId = (req, res, next, id) => {
+    Order.find({farmerId: id}).exec((err, order) => {
+        if(err || !order) {
+            return res.status(400).json({
+                error: "Product not found"
+            });
+        }
+        req.order = order
+        next();
+    })
+};
+
+orderByUserId = (req, res, next, id) => {
+    Order.find({userId: id}).exec((err, order) => {
+        if(err || !order) {
+            return res.status(400).json({
+                error: "Product not found"
+            });
+        }
+        req.order = order
+        next();
+    })
+};
+
+searchByFarmerId = (req, res) => {
+    req.order.farmerId = undefined
+    return res.json(req.order)
+};
+
+searchByUserId = (req, res) => {
+    req.order.userId = undefined
+    return res.json(req.order)
+};
+
+router.get('/orders/farmer/:orderByFarmerId', searchByFarmerId);
+router.get('/orders/user/:orderUserId', searchByUserId)
+router.param('orderByFarmerId', orderByFarmerId)
+router.param('orderUserId', orderByUserId);
+
 
 module.exports = router;
