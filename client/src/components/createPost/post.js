@@ -101,7 +101,11 @@ class Post extends Component {
     formData.append('farmer', this.state.farmer);
 
     this.props.createPost(formData);
-    this.props.history.push('/');
+
+    if (this.state.description !== '' && this.state.location !== '') {
+      console.log('push to homepage')
+      this.props.history.push('/');
+    }
   };
 
   render() {

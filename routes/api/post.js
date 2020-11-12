@@ -73,10 +73,14 @@ router.post("/createpost", (req, res) => {
 
 // Viewing any posts photo, using the content-type we created in schema
 photo = (req, res, next) => {
+    console.log(req.post.photo.data);
     if (req.post.photo.data) {
         res.set('Content-Type', req.post.photo.contentType);
         return res.send(req.post.photo.data);
+    } else if (req.post.photo.data === undefined) {
+        return res.send('Error');
     }
+
     next();
 };
 
