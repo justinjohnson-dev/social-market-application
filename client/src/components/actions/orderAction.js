@@ -3,10 +3,22 @@ import {
     GET_ERRORS,
 } from "./types";
 
-// create post
+// create order
 export const createOrder = (userOrder, history) => dispatch => {
     axios
         .post("/api/orders/createorder", userOrder)
+        .catch(err =>
+            dispatch({
+                type: GET_ERRORS,
+                payload: err.response.data
+            })
+        );
+};
+
+// create order response
+export const createOrderResponse = (farmerResponse, history) => dispatch => {
+    axios
+        .post("/api/orders/farmerresponse", farmerResponse)
         .catch(err =>
             dispatch({
                 type: GET_ERRORS,

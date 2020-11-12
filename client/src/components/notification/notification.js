@@ -23,7 +23,7 @@ class Notification extends Component {
     }
 
     loadOrders() {
-        getFarmerOrder(this.props.auth.user.id,).then(data => {
+        getFarmerOrder(this.props.auth.user.id).then(data => {
             if (data.error) {
                 this.setState({
                     error: data.error
@@ -32,7 +32,6 @@ class Notification extends Component {
                 this.setState({
                     loadOrder: data
                 });
-                console.log(this.state.loadOrder)
             }
         });
     }

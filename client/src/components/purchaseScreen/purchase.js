@@ -26,6 +26,14 @@ class Purchase extends Component {
         };
     }
 
+    componentWillReceiveProps(nextProps) {
+        if (nextProps.errors) {
+            this.setState({
+                errors: nextProps.errors
+            });
+        }
+    }
+
     componentDidMount() {
         // FETCH data
         this.loadFarmerInfo();
@@ -62,6 +70,11 @@ class Purchase extends Component {
         formData.append('farmerId', this.state.loadUser._id)
 
         this.props.createOrder(formData);
+
+        if (this.state.items !== '' && this.state.quantity !== '') {
+            console.log('push to homepage')
+            this.props.history.push('/');
+        }
     };
 
     render() {
@@ -72,11 +85,11 @@ class Purchase extends Component {
                 <div>
                     <p>hello, you are looking to purchase a product from <b>{this.state.loadUser.name}</b> </p>
                 </div>
-                <div className="card-footer product-div">
-                    <div className="product1">
+                <div className="highlight-div">
+                    <div className="highlight1">
                         <ShowHighlight className='highlight-size' item={post} url="posts" />
                     </div>
-                    <div className="product2">
+                    <div className="highlight2">
                         <ShowHighlight2 className='highlight-size' item={post} url="posts" />
                     </div>
                 </div>
@@ -88,6 +101,7 @@ class Purchase extends Component {
                         type="textbox"
                         id="items"
                         label="What Item(s) do you want to order?"
+                        InputLabelProps={{ style: { fontSize: 12 } }}
                         multiline
                         rows={1}
                         fullWidth="true"
@@ -101,10 +115,11 @@ class Purchase extends Component {
                     <TextField
                         onChange={this.onChange}
                         error={errors.quantity}
-                        value={this.state.itquantityems}
+                        value={this.state.quantity}
                         type="textbox"
                         id="quantity"
                         label="How many would you like to order?"
+                        InputLabelProps={{ style: { fontSize: 12 } }}
                         multiline
                         rows={1}
                         fullWidth="true"
