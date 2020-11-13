@@ -20,15 +20,15 @@ router.post("/createorder", (req, res) => {
         }
 
         // Check to make sure all fields are filled out
-        const { items, quantity, userId, farmerId } = fields
-        if (!items || !quantity || !userId || !farmerId) {
+        const { items, quantity, userId, farmerId, completed } = fields
+        if (!items || !quantity || !userId || !farmerId || !completed) {
             return res.status(400).json({
                 error: "All fields are required"
             });
         }
 
         let order = new Order(fields)
-        
+
         // Save the new post
         order.save((err, success) => {
             if (err) {
@@ -51,8 +51,8 @@ router.get('/orders', async (req, res) => {
 });
 
 orderByFarmerId = (req, res, next, id) => {
-    Order.find({farmerId: id}).exec((err, order) => {
-        if(err || !order) {
+    Order.find({ farmerId: id }).exec((err, order) => {
+        if (err || !order) {
             return res.status(400).json({
                 error: "Product not found"
             });
@@ -63,8 +63,8 @@ orderByFarmerId = (req, res, next, id) => {
 };
 
 orderByUserId = (req, res, next, id) => {
-    Order.find({userId: id}).exec((err, order) => {
-        if(err || !order) {
+    Order.find({ userId: id }).exec((err, order) => {
+        if (err || !order) {
             return res.status(400).json({
                 error: "Product not found"
             });

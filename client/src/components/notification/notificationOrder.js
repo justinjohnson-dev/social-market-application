@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import classnames from "classnames";
+import axios from 'axios';
 import { getUser } from '../purchaseScreen/purchaseApi';
 import { createOrderResponse } from "../actions/orderAction";
 import { Button } from "@material-ui/core";
@@ -66,8 +67,15 @@ class notificationOrder extends Component {
         formData.append('farmerId', this.state.loadOrder.farmerId);
         formData.append('comment', this.state.comment);
         formData.append('status', this.state.status);
+        formData.append('completed', "Yes");
 
-        this.props.createOrderResponse(formData);
+        axios.post(`/api/orders/farmerresponse/${this.state.loadOrder._id}`, { formData })
+            .then(res => {
+                console.log(res)
+                console.log(res.data)
+            })
+
+        // this.props.createOrderResponse(formData, this.state.loadOrder._id);
 
         // if (this.state.comment !== '' && this.state.status !== '') {
         //     console.log('push to homepage')
@@ -77,6 +85,8 @@ class notificationOrder extends Component {
 
     render() {
         const { errors } = this.state;
+        console.log('this.state.loadOrder')
+        console.log(this.props.order)
         return (
             <div className="col-4 match-height card-direction">
                 <div className="card">

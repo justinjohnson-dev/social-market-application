@@ -4,9 +4,13 @@ const formidable = require('formidable');
 // Load input validation
 const validateOrderResponseInput = require("../../validation/orderResponse")
 // Load User model
-const OrderResponse = require("../../models/orderResponse");
+const Order = require("../../models/order");
 
-router.post("/farmerresponse", (req, res) => {
+router.post("/farmerresponse/:id", (req, res) => {
+    let id = req.params.id;
+    console.log("id")
+    console.log(id)
+
     // using the formidable package to handle
     let form = new formidable.IncomingForm()
     form.keepExtensions = true
@@ -27,19 +31,28 @@ router.post("/farmerresponse", (req, res) => {
             });
         }
 
-        let order = new OrderResponse(fields)
+        let order = new Order(fields)
+
+        return res.json(order)
+
 
         // Save the new post
-        order.save((err, success) => {
-            if (err) {
-                return res.status(400).json({
-                    error: errorHandler(err)
-                });
-            }
-            res.json(success);
-        });
+
+        // order.save((err, success) => {
+        //     if (err) {
+        //         return res.status(400).json({
+        //             error: errorHandler(err)
+        //         });
+        //     }
+        //     res.json(success);
+        // });
     });
 });
+
+order = (req, res, next, id, order) => {
+    Order.update({ farmerId: id }, { order });
+};
+router.param('id', order)
 
 
 module.exports = router;

@@ -27,6 +27,9 @@ const orderResponseSchema = new Schema({
     status: {
         type: String,
         required: true
+    },
+    completed: {
+        type: String
     }
 }, { timestamps: true }
 );
