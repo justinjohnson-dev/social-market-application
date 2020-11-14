@@ -18,7 +18,7 @@ export const createOrder = (userOrder, history) => dispatch => {
 // create order response
 export const createOrderResponse = (farmerResponse, orderId, history) => dispatch => {
     axios
-        .post(`/api/orders/farmerresponse/${orderId}`, farmerResponse)
+        .put(`/api/orders/farmerresponse/${orderId}`, farmerResponse)
         .catch(err =>
             dispatch({
                 type: GET_ERRORS,

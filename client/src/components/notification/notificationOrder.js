@@ -68,25 +68,16 @@ class notificationOrder extends Component {
         formData.append('comment', this.state.comment);
         formData.append('status', this.state.status);
         formData.append('completed', "Yes");
+        
+        this.props.createOrderResponse(formData, this.state.loadOrder._id);
 
-        axios.post(`/api/orders/farmerresponse/${this.state.loadOrder._id}`, { formData })
-            .then(res => {
-                console.log(res)
-                console.log(res.data)
-            })
-
-        // this.props.createOrderResponse(formData, this.state.loadOrder._id);
-
-        // if (this.state.comment !== '' && this.state.status !== '') {
-        //     console.log('push to homepage')
-        //     this.props.history.push('/');
-        // }
+        if (this.state.comment !== '' && this.state.status !== '') {
+            window.location.reload();
+        }
     };
 
     render() {
         const { errors } = this.state;
-        console.log('this.state.loadOrder')
-        console.log(this.props.order)
         return (
             <div className="col-4 match-height card-direction">
                 <div className="card">

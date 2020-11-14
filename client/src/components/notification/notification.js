@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import PropTypes, { array } from "prop-types";
 import { connect } from "react-redux";
 import { getFarmerOrder } from './farmerOrderApi';
-import { getUserId } from './userOrderApi';
 import { Button } from "@material-ui/core";
 import Order from './notificationOrder';
 import './notification.css';
@@ -39,6 +38,9 @@ class Notification extends Component {
                 this.setState({
                     orderCount: this.state.loadOrder.length,
                 });
+
+                console.log("loadOrder")
+                console.log(this.state.loadOrder)
                 this.setState({
                     sendToNotification: this.state.loadOrder[0],
                 });
@@ -58,9 +60,8 @@ class Notification extends Component {
         const singleItem = [];
         singleItem.push(this.state.sendToNotification)
 
-        console.log('completed or no')
-        console.log(this.state.sendToNotification.completed)
-
+        console.log(this.state.showOrder)
+        console.log(this.state.sendToNotification)
         return (
             <div className="main-container">
                 <h2 className="mb-4 title home-page-title-styling"><i class="far fa-envelope"></i> <span className="orderCount">{this.state.orderCount}</span> Current Orders</h2>

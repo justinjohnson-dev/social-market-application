@@ -51,16 +51,29 @@ router.get('/orders', async (req, res) => {
 });
 
 orderByFarmerId = (req, res, next, id) => {
+    // new array to store order we want to sent to farmer
+    const newArray = [];
+
     Order.find({ farmerId: id }).exec((err, order) => {
         if (err || !order) {
             return res.status(400).json({
                 error: "Product not found"
             });
         }
-        req.order = order
+
+        // loop through orders
+        // push only valid orders to new array to send to farmer
+        for (let i = 0; i < order.length; i++) {
+            if (order[i].completed === "No") {
+                newArray.push(order[i])
+            }
+        }
+
+        req.order = newArray
         next();
     })
 };
+
 
 orderByUserId = (req, res, next, id) => {
     Order.find({ userId: id }).exec((err, order) => {

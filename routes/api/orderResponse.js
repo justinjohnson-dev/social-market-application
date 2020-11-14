@@ -1,15 +1,14 @@
 const express = require("express");
 const router = express.Router();
+const objectId = require('mongodb').ObjectID;
 const formidable = require('formidable');
 // Load input validation
 const validateOrderResponseInput = require("../../validation/orderResponse")
 // Load User model
 const Order = require("../../models/order");
 
-router.post("/farmerresponse/:id", (req, res) => {
+router.put("/farmerresponse/:id", (req, res) => {
     let id = req.params.id;
-    console.log("id")
-    console.log(id)
 
     // using the formidable package to handle
     let form = new formidable.IncomingForm()
@@ -24,8 +23,8 @@ router.post("/farmerresponse/:id", (req, res) => {
         }
 
         // Check to make sure all fields are filled out
-        const { items, quantity, userId, farmerId, comment, status } = fields
-        if (!items || !quantity || !userId || !farmerId || !comment || !status) {
+        const { items, quantity, userId, farmerId } = fields
+        if (!items || !quantity || !userId || !farmerId) {
             return res.status(400).json({
                 error: "All fields are required"
             });
@@ -33,26 +32,33 @@ router.post("/farmerresponse/:id", (req, res) => {
 
         let order = new Order(fields)
 
-        return res.json(order)
+        // find and save updated order
+        Order.findOne({ _id: id }, function (err, foundOject) {
+            if (err) {
+                console.log(err)
+                res.status(500).send()
+            } else {
+                if (!foundOject) {
+                    res.status(404).send();
+                } else {
 
+                    foundOject.status = order.status;
+                    foundOject.comment = order.comment;
+                    foundOject.completed = order.completed;
 
-        // Save the new post
-
-        // order.save((err, success) => {
-        //     if (err) {
-        //         return res.status(400).json({
-        //             error: errorHandler(err)
-        //         });
-        //     }
-        //     res.json(success);
-        // });
+                    foundOject.save(function (err, updatedObject) {
+                        if (err) {
+                            console.log(err);
+                            res.status(500).send();
+                        } else {
+                            res.send(updatedObject);
+                        }
+                    })
+                }
+            }
+        });
     });
 });
-
-order = (req, res, next, id, order) => {
-    Order.update({ farmerId: id }, { order });
-};
-router.param('id', order)
 
 
 module.exports = router;
