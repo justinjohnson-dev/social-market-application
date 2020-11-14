@@ -1,12 +1,15 @@
 const express = require("express");
 const router = express.Router();
+const objectId = require('mongodb').ObjectID;
 const formidable = require('formidable');
 // Load input validation
 const validateOrderResponseInput = require("../../validation/orderResponse")
 // Load User model
-const OrderResponse = require("../../models/orderResponse");
+const Order = require("../../models/order");
 
-router.post("/farmerresponse", (req, res) => {
+router.put("/farmerresponse/:id", (req, res) => {
+    let id = req.params.id;
+
     // using the formidable package to handle
     let form = new formidable.IncomingForm()
     form.keepExtensions = true
@@ -20,23 +23,39 @@ router.post("/farmerresponse", (req, res) => {
         }
 
         // Check to make sure all fields are filled out
-        const { items, quantity, userId, farmerId, comment, status } = fields
-        if (!items || !quantity || !userId || !farmerId || !comment || !status) {
+        const { items, quantity, userId, farmerId } = fields
+        if (!items || !quantity || !userId || !farmerId) {
             return res.status(400).json({
                 error: "All fields are required"
             });
         }
 
-        let order = new OrderResponse(fields)
+        let order = new Order(fields)
 
-        // Save the new post
-        order.save((err, success) => {
+        // find and save updated order
+        Order.findOne({ _id: id }, function (err, foundOject) {
             if (err) {
-                return res.status(400).json({
-                    error: errorHandler(err)
-                });
+                console.log(err)
+                res.status(500).send()
+            } else {
+                if (!foundOject) {
+                    res.status(404).send();
+                } else {
+
+                    foundOject.status = order.status;
+                    foundOject.comment = order.comment;
+                    foundOject.completed = order.completed;
+
+                    foundOject.save(function (err, updatedObject) {
+                        if (err) {
+                            console.log(err);
+                            res.status(500).send();
+                        } else {
+                            res.send(updatedObject);
+                        }
+                    })
+                }
             }
-            res.json(success);
         });
     });
 });

@@ -1,8 +1,8 @@
 import React, { Component } from "react";
-import PropTypes from "prop-types";
+import PropTypes, { array } from "prop-types";
 import { connect } from "react-redux";
 import { getFarmerOrder } from './farmerOrderApi';
-import { getUserId } from './userOrderApi';
+import { Button } from "@material-ui/core";
 import Order from './notificationOrder';
 import './notification.css';
 
@@ -12,6 +12,9 @@ class Notification extends Component {
         super(props);
         this.state = {
             loadOrder: [],
+            sendToNotification: [],
+            orderCount: 0,
+            showOrder: '',
             error: false,
             errors: {}
         };
@@ -30,19 +33,48 @@ class Notification extends Component {
                 });
             } else {
                 this.setState({
-                    loadOrder: data
+                    loadOrder: data,
+                });
+                this.setState({
+                    orderCount: this.state.loadOrder.length,
+                });
+
+                console.log("loadOrder")
+                console.log(this.state.loadOrder)
+                this.setState({
+                    sendToNotification: this.state.loadOrder[0],
                 });
             }
         });
     }
 
+    onSubmit = () => {
+        if (this.state.orderCount > 0) {
+            this.setState({
+                showOrder: "yes",
+            })
+        }
+    }
+
     render() {
+        const singleItem = [];
+        singleItem.push(this.state.sendToNotification)
+
+        console.log(this.state.showOrder)
+        console.log(this.state.sendToNotification)
         return (
             <div className="main-container">
-                <h2 className="mb-4 title home-page-title-styling">Current Orders</h2>
-                <div className="row">
-                    {this.state.loadOrder.map((order, index) => (<Order key={index} order={order} />))}
-                </div>
+                <h2 className="mb-4 title home-page-title-styling"><i class="far fa-envelope"></i> <span className="orderCount">{this.state.orderCount}</span> Current Orders</h2>
+                {this.state.orderCount !== 0 &&
+                    <Button type="submit" onClick={this.onSubmit} variant="outlined" className="button-color">
+                        <i class="far fa-envelope"> View Order</i>
+                    </Button>
+                }
+                {this.state.showOrder === 'yes' && this.state.sendToNotification.completed === "No" &&
+                    <div className="row">
+                        {singleItem.map((order, index) => (<Order key={index} order={order} />))}
+                    </div>
+                }
             </div>
         );
     }

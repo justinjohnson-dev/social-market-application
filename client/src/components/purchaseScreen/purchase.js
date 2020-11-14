@@ -22,6 +22,9 @@ class Purchase extends Component {
             farmerId: '',
             items: '',
             quantity: '',
+            comment: '',
+            status: '',
+            completed: 'No',
             errors: {}
         };
     }
@@ -68,6 +71,9 @@ class Purchase extends Component {
         formData.append('quantity', this.state.quantity);
         formData.append('userId', this.state.userId);
         formData.append('farmerId', this.state.loadUser._id)
+        formData.append('comment', this.state.comment);
+        formData.append('status', this.state.status);
+        formData.append('completed', this.state.completed)
 
         this.props.createOrder(formData);
 

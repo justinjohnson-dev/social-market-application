@@ -20,6 +20,15 @@ const orderSchema = new Schema({
     farmerId: {
         type: String,
         trim: true
+    },
+    comment: {
+        type: String
+    },
+    status: {
+        type: String,
+    },
+    completed: {
+        type: String
     }
 }, { timestamps: true }
 );

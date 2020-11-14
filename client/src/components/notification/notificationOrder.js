@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import classnames from "classnames";
+import axios from 'axios';
 import { getUser } from '../purchaseScreen/purchaseApi';
 import { createOrderResponse } from "../actions/orderAction";
 import { Button } from "@material-ui/core";
@@ -66,13 +67,13 @@ class notificationOrder extends Component {
         formData.append('farmerId', this.state.loadOrder.farmerId);
         formData.append('comment', this.state.comment);
         formData.append('status', this.state.status);
+        formData.append('completed', "Yes");
+        
+        this.props.createOrderResponse(formData, this.state.loadOrder._id);
 
-        this.props.createOrderResponse(formData);
-
-        // if (this.state.comment !== '' && this.state.status !== '') {
-        //     console.log('push to homepage')
-        //     this.props.history.push('/');
-        // }
+        if (this.state.comment !== '' && this.state.status !== '') {
+            window.location.reload();
+        }
     };
 
     render() {
