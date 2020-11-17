@@ -59,9 +59,6 @@ class Notification extends Component {
     render() {
         const singleItem = [];
         singleItem.push(this.state.sendToNotification)
-
-        console.log(this.state.showOrder)
-        console.log(this.state.sendToNotification)
         return (
             <div className="main-container">
                 <h2 className="mb-4 title home-page-title-styling"><i class="far fa-envelope"></i> <span className="orderCount">{this.state.orderCount}</span> Current Orders</h2>
