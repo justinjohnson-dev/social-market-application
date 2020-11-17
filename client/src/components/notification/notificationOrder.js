@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import classnames from "classnames";
-import axios from 'axios';
 import { getUser } from '../purchaseScreen/purchaseApi';
 import { createOrderResponse } from "../actions/orderAction";
 import { Button } from "@material-ui/core";
@@ -68,7 +67,7 @@ class notificationOrder extends Component {
         formData.append('comment', this.state.comment);
         formData.append('status', this.state.status);
         formData.append('completed', "Yes");
-        
+
         this.props.createOrderResponse(formData, this.state.loadOrder._id);
 
         if (this.state.comment !== '' && this.state.status !== '') {
@@ -80,12 +79,12 @@ class notificationOrder extends Component {
         const { errors } = this.state;
         return (
             <div className="col-4 match-height card-direction">
-                <div className="card">
-                    <div className="card-header order-name">Order from user: {this.state.userName}</div>
+                <div className="card notification-card">
+                    <div className="card-header order-name">Order from user: <span className="bold-font">{this.state.userName}</span></div>
                     <div className="card-body">
                         <div className="card-body-styling">
-                            <p className="">Customer wants to purchase: {this.state.loadOrder.items}</p>
-                            <p className="">Quantity requested: {this.state.loadOrder.quantity}</p>
+                            <p className="">Customer wants to purchase: <span className="bold-font">{this.state.loadOrder.items}</span></p>
+                            <p className="">Quantity requested: <span className="bold-font">{this.state.loadOrder.quantity}</span></p>
                         </div>
                         <div className="comment-div">
                             <TextField
@@ -119,17 +118,11 @@ class notificationOrder extends Component {
                             />
                             <p className="red-text">{errors.status}</p>
                         </div>
-                        <Button type="submit" onClick={this.onSubmit} variant="outlined" className="button-color">
-                            Send
-                        </Button>
-                        {/* <div className="response-buttons">
-                            <Button type="submit" variant="outlined" className="button-color">
-                                Accept
+                        <div className="response-button-div">
+                            <Button type="submit" onClick={this.onSubmit} variant="outlined" className="button-color">
+                                Send Response
                             </Button>
-                            <Button type="submit" variant="outlined" className="button-color">
-                                Decline
-                            </Button>
-                        </div> */}
+                        </div>
                     </div>
                 </div>
             </div>

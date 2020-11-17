@@ -11,8 +11,8 @@ import Signup from './components/signup/signup';
 import Navigation from './components/navigation/navigation';
 import PrivateRoute from './components/private-route/privateroute';
 import Dashboard from './components/dashboard/dashboard';
-import JoinChat from './components/Chat/JoinChat/JoinChat';
-import Chat from './components/Chat/Chat';
+import JoinChat from './components/chat/JoinChat/JoinChat';
+import Chat from './components/chat/Chat';
 import post from './components/createPost/post';
 import getPost from './components/createPost/fetchPost';
 import Header from './components/header/Header';
@@ -21,6 +21,7 @@ import Home from './components/home/home';
 import tester from './components/signup/test';
 import purchase from './components/purchaseScreen/purchase';
 import notification from './components/notification/notification';
+import userNotification from './components/notification/userNotification';
 
 
 // Check for token to keep user logged in
@@ -63,6 +64,7 @@ class App extends Component {
               <PrivateRoute exact path="/post" component={post} />
               <PrivateRoute exact path="/purchase" component={purchase} />
               <PrivateRoute exact path="/notification" component={notification} />
+              <PrivateRoute exact path="/usernotification" component={userNotification} />
             </Switch>
           </div>
         </Router>

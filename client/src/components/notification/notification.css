@@ -13,3 +13,19 @@
 .orderCount {
     font-weight: bold;
 }
+
+.response-button-div {
+    padding: 5% 0px;
+}
+
+.notification-card {
+    width: 30%;
+}
+
+.bold-font {
+    font-weight: bold;
+}
+
+.user-notification-div {
+    padding-bottom: 15px;
+}

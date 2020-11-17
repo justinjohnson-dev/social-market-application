@@ -57,7 +57,7 @@ orderByFarmerId = (req, res, next, id) => {
     Order.find({ farmerId: id }).exec((err, order) => {
         if (err || !order) {
             return res.status(400).json({
-                error: "Product not found"
+                error: "Order not found"
             });
         }
 
@@ -76,12 +76,22 @@ orderByFarmerId = (req, res, next, id) => {
 
 
 orderByUserId = (req, res, next, id) => {
+    const newArray = [];
+
     Order.find({ userId: id }).exec((err, order) => {
         if (err || !order) {
             return res.status(400).json({
-                error: "Product not found"
+                error: "Order not found"
             });
         }
+
+        // loop through orders and only show completed orders
+        for (let i = 0; i < order.length; i++) {
+            if (order[i].completed === "Yes") {
+                newArray.push(order[i])
+            }
+        }
+
         req.order = order
         next();
     })
