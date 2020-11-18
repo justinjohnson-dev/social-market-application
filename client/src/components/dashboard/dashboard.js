@@ -19,7 +19,8 @@ const useStyles = makeStyles((theme) => ({
   paper: {
     padding: theme.spacing(2),
     margin: "auto",
-    maxWidth: 500
+    maxWidth: 500,
+    minHeight:"250px"
   },
   image: {
     width: 128,
@@ -103,23 +104,68 @@ function ComplexGrid(props) {
    
     </div>
     <div className={classes.root}>
-   <Paper>
+   <Paper className={classes.paper} >
     <Grid container>
       <Grid item md={4}>
-
+      
       </Grid>
       <Grid item md={8}>
+      <Grid item xs>
+                <div className={classes.formContent}>
+                  <div>
+                    User Profile
+               </div>
+
+                  <div>
+                    <label>  Name:{user.name} </label>
+                  </div>
+                  <div>
+                    <label> Email: {user.email} </label>
+                  </div>
+                  <div>
+                    <label>
+                      Farmer:
+                  </label>
+                  </div>
+
+                </div>
+                <Button variant="contained" color="primary" disableElevation>
+                  Edit
+</Button>
+              </Grid>
       </Grid>
     </Grid>
   </Paper>
   </div>
    <div className={classes.root}>
-  <Paper>
+  <Paper className={classes.paper} >
     <Grid container>
       <Grid item md={4}>
-
+        
       </Grid>
       <Grid item md={8}>
+      <Grid item xs>
+                <div className={classes.formContent}>
+                  <div>
+                    User Profile
+               </div>
+                  <div>
+                    <label>  Name:{user.name} </label>
+                  </div>
+                  <div>
+                    <label> Email: {user.email} </label>
+                  </div>
+                  <div>
+                    <label>
+                      Farmer:
+                  </label>
+                  </div>
+
+                </div>
+                <Button variant="contained" color="primary" disableElevation>
+                  Edit
+</Button>
+              </Grid>
       </Grid>
     </Grid>
   </Paper>
