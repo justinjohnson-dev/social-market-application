@@ -113,24 +113,24 @@ function ComplexGrid(props) {
       <Grid item xs>
                 <div className={classes.formContent}>
                   <div>
-                    User Profile
+                    Purchases
                </div>
 
                   <div>
-                    <label>  Name:{user.name} </label>
+                    <label> Name of Farm: </label>
                   </div>
                   <div>
-                    <label> Email: {user.email} </label>
+                    <label> Date Purchased:  </label>
                   </div>
                   <div>
                     <label>
-                      Farmer:
+                      Number of Order Forms:
                   </label>
                   </div>
 
                 </div>
                 <Button variant="contained" color="primary" disableElevation>
-                  Edit
+                  Save
 </Button>
               </Grid>
       </Grid>
@@ -141,23 +141,23 @@ function ComplexGrid(props) {
   <Paper className={classes.paper} >
     <Grid container>
       <Grid item md={4}>
-        
+
       </Grid>
       <Grid item md={8}>
       <Grid item xs>
                 <div className={classes.formContent}>
                   <div>
-                    User Profile
+                    Payment Information
                </div>
                   <div>
-                    <label>  Name:{user.name} </label>
+                    <label>  Name: </label>
                   </div>
                   <div>
-                    <label> Email: {user.email} </label>
+                    <label> Card Number: </label>
                   </div>
                   <div>
                     <label>
-                      Farmer:
+                      Exp. Date:
                   </label>
                   </div>
 

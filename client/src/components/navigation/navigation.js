@@ -28,7 +28,7 @@ class Navigation extends Component {
             <div>
                 {this.checkToken() === true &&
                     <div className="login-user right">
-                        <h4 className="user"><i className="fas fa-user"></i> Hello, {user.name} </h4>
+                        <h4 className="user"><i className="fas fa-user"></i> Hello,{user.name}</h4>
                     </div>
                 }
 
