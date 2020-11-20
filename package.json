@@ -36,7 +36,6 @@
     "mongodb": "^3.6.3",
     "mongoose": "^5.10.7",
     "morgan": "^1.10.0",
-    "node": "^14.13.1",
     "passport": "^0.4.1",
     "passport-jwt": "^4.0.0",
     "redux": "^4.0.5",
