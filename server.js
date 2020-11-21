@@ -56,11 +56,11 @@ if (process.env.NODE_ENV === 'local') {
   console.log('local');
 } else {
   // Set static folder
-  // app.use(express.static('client/public'));
-  app.use('/static', express.static(path.join(__dirname, 'client/build')));
+  app.use(express.static('client/build'));
+  // app.use('/static', express.static(path.join(__dirname, 'client/build')));
 
   app.get('*', (req, res) => {
-    res.sendFile(path.resolve(__dirname, 'client', 'public', 'index.html'));
+    res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'));
   });
 }
 
