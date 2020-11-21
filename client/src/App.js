@@ -47,7 +47,7 @@ class App extends Component {
   render() {
     return (
       <Provider store={store}>
-        <Router basename="/React">
+        <Router>
           <div className="App">
             <Navbar />
             <Header />
