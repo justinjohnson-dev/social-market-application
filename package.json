@@ -3,14 +3,14 @@
   "homepage": ".",
   "version": "1.0.0",
   "engines": {
-    "node": "10.x",
+    "node": "12.x",
     "yarn": "1.x"
   },
   "description": "Application where users can create accounts and share posts of local farms and sales",
   "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "heroku-postbuild": "cd client && npm install && npm run build",
+    "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install --prefix client && npm run build --prefix client",
     "server": "node ./server.js",
     "start:dev": "nodemon ./server.js",
     "client": "npm start --prefix client",
@@ -19,7 +19,6 @@
   "author": "Team 4",
   "license": "ISC",
   "dependencies": {
-    "@material-ui/core": "^4.11.0",
     "bcryptjs": "^2.4.3",
     "body-parser": "^1.19.0",
     "concurrently": "^5.3.0",
@@ -37,9 +36,9 @@
     "mongodb": "^3.6.3",
     "mongoose": "^5.10.7",
     "morgan": "^1.10.0",
-    "node": "^14.13.1",
     "passport": "^0.4.1",
     "passport-jwt": "^4.0.0",
+    "react-router-dom": "^5.2.0",
     "redux": "^4.0.5",
     "rootpath": "^0.1.2",
     "save": "^2.4.0",
