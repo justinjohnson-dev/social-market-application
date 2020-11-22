@@ -43,7 +43,11 @@ function ComplexGrid(props) {
   const classes = useStyles();
 
   const { user } = props.auth;
+  
+ 
+ 
   return (
+   
     <div>
     <div className={classes.root}>
       <Paper className={classes.paper}>
@@ -60,11 +64,12 @@ function ComplexGrid(props) {
 
                 />
                 <CardActions>
-                  <Button size="small" color="primary">
-                    Upload Picture
-        </Button>
-
-                </CardActions>
+                  
+                
+                <input type="file" />
+                
+      
+               </CardActions>
               </CardActionArea>
             </Card>
           </Grid>
@@ -88,12 +93,13 @@ function ComplexGrid(props) {
                     <label>
                       Farmer:
                   </label>
+                  <button>Yes</button><button>Yes</button>
                   </div>
 
                 </div>
                 <Button variant="contained" color="primary" disableElevation>
                   Edit
-</Button>
+                </Button>
               </Grid>
             </Grid>
           </Grid>
