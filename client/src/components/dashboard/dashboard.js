@@ -93,7 +93,7 @@ function ComplexGrid(props) {
                     <label>
                       Farmer:
                   </label>
-                  <button>Yes</button><button>Yes</button>
+                  <button>Yes</button><button>No</button>
                   </div>
 
                 </div>
