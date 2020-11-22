@@ -59,10 +59,8 @@ function ComplexGrid(props) {
 
                 />
                 <CardActions>
-                  <Button size="small" color="primary">
-                    Upload Picture
-        </Button>
-
+               
+        <input type="file"></input>
                 </CardActions>
               </CardActionArea>
             </Card>
@@ -76,7 +74,7 @@ function ComplexGrid(props) {
                   <div>
                     User Profile
                </div>
-
+                
                   <div>
                     <label>  Name:{user.name} </label>
                   </div>
@@ -86,6 +84,7 @@ function ComplexGrid(props) {
                   <div>
                     <label>
                       Farmer:
+                      <button>Yes</button><button>No</button>
                   </label>
                   </div>
 
