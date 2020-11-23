@@ -5,9 +5,14 @@ import classnames from "classnames";
 import { getUser } from '../purchaseScreen/purchaseApi';
 import { createOrderResponse } from "../actions/orderAction";
 import { Button } from "@material-ui/core";
+import { makeStyles } from '@material-ui/core/styles';
 import {
     TextField
 } from "@material-ui/core";
+import InputLabel from '@material-ui/core/InputLabel';
+import MenuItem from '@material-ui/core/MenuItem';
+import FormControl from '@material-ui/core/FormControl';
+import Select from '@material-ui/core/Select';
 import './notification.css';
 
 
@@ -40,6 +45,10 @@ class notificationOrder extends Component {
     onChange = e => {
         this.setState({ [e.target.id]: e.target.value });
     };
+
+    onDropChange = e => {
+        this.setState({ status: e.target.value })
+    }
 
     loadUserName() {
         getUser(this.state.loadOrder.userId).then(data => {
@@ -75,8 +84,17 @@ class notificationOrder extends Component {
         }
     };
 
+    useStyles = makeStyles((theme) => ({
+        formControl: {
+            margin: theme.spacing(1),
+            minWidth: 500
+        },
+    }));
+
     render() {
         const { errors } = this.state;
+        const classes = this.useStyles;
+
         return (
             <div className="col-4 match-height card-direction">
                 <div className="card notification-card">
@@ -102,20 +120,19 @@ class notificationOrder extends Component {
                             />
                             <p className="red-text">{errors.comment}</p>
                         </div>
-                        <div className="status-div">
-                            <TextField
-                                onChange={this.onChange}
-                                error={errors.status}
-                                value={this.state.status}
-                                type="textbox"
-                                id="status"
-                                label="Approve/Decline"
-                                multiline
-                                rows={4}
-                                className={classnames("", {
-                                    invalid: errors.status
-                                })}
-                            />
+                        <div className="">
+                            <FormControl style={{ width: "160px" }}>
+                                <InputLabel id="demo-simple-select-label">Approve/Decline</InputLabel>
+                                <Select
+                                    id="status"
+                                    value={this.state.status}
+                                    onChange={this.onDropChange}
+                                    fullWidth="true"
+                                >
+                                    <MenuItem value={"Approve"}>Approve</MenuItem>
+                                    <MenuItem value={"Decline"}>Decline</MenuItem>
+                                </Select>
+                            </FormControl>
                             <p className="red-text">{errors.status}</p>
                         </div>
                         <div className="response-button-div">
