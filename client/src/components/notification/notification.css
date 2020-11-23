@@ -29,3 +29,8 @@
 .user-notification-div {
     padding-bottom: 15px;
 }
+
+.button-color:focus {
+    background-color: rgb(196, 141, 41);
+    color: white;
+}

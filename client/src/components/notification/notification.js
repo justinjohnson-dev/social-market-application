@@ -38,9 +38,6 @@ class Notification extends Component {
                 this.setState({
                     orderCount: this.state.loadOrder.length,
                 });
-
-                console.log("loadOrder")
-                console.log(this.state.loadOrder)
                 this.setState({
                     sendToNotification: this.state.loadOrder[0],
                 });
