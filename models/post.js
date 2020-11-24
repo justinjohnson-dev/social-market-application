@@ -32,6 +32,10 @@ const postSchema = new Schema({
     farmerId: {
         type: String,
         trim: true
+    },
+    usersLiked: {
+        type: Array,
+        trim: true
     }
 }, { timestamps: true }
 );

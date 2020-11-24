@@ -71,6 +71,34 @@ router.post("/createpost", (req, res) => {
     });
 });
 
+router.put("/postLike/:id", (req, res) => {
+    let id = req.params.id;
+    const usersLiked = req.body.usersLiked
+
+    // find and save updated post
+    Post.findOne({ _id: id }, function (err, foundOject) {
+        if (err) {
+            console.log(err)
+            res.status(500).send()
+        } else {
+            if (!foundOject) {
+                res.status(404).send();
+            } else {
+                foundOject.usersLiked = usersLiked;
+
+                foundOject.save(function (err, updatedObject) {
+                    if (err) {
+                        console.log(err);
+                        res.status(500).send();
+                    } else {
+                        res.send(updatedObject);
+                    }
+                })
+            }
+        }
+    });
+})
+
 // Viewing any posts photo, using the content-type we created in schema
 photo = (req, res, next) => {
     console.log(req.post.photo.data);
