@@ -127,3 +127,7 @@
 .icon-like-button {
     font-size: 15px;
 }
+
+.icon-like-button:hover {
+    font-size: 16px;
+}
