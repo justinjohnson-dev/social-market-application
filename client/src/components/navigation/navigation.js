@@ -10,6 +10,7 @@ class Navigation extends Component {
     onLogoutClick = e => {
         e.preventDefault();
         this.props.logoutUser();
+        window.location.reload(false);
     };
 
     // checking if we have a token to display users name
@@ -31,7 +32,6 @@ class Navigation extends Component {
                         <h4 className="user"><i className="fas fa-user"></i> Hello, {user.name}</h4>
                     </div>
                 }
-
                 {this.checkToken() === true &&
                     <div className="logout-button right">
                         <button onClick={this.onLogoutClick} className="btn btn-small logout-button">
