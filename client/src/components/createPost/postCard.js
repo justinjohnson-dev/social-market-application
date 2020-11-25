@@ -11,44 +11,58 @@ import './post.css';
 
 const Card = ({ post, user }) => {
     const [clicked, setClick] = useState("false");
-    const [buttonColor, setButtonColor] = useState("black");
-    const [alreadyLiked, setAlreadyLiked] = useState("false");
     const [countUserLikes, setCountUserLikes] = useState(0);
+    const [diableButton, setDisableButton] = useState('false');
 
     useEffect(() => {
         // Update the document title using the browser API
         let usersLiked = post.usersLiked;
         for (let i = 0; i < usersLiked.length; i++) {
             if (usersLiked[i] === user.id) {
-                setAlreadyLiked("true");
+                setClick("true");
             }
         }
         // set like count
         setCountUserLikes(usersLiked.length)
+        if (user.id === undefined) {
+            setDisableButton('true');
+        }
     }, []);
 
     const clickedLikeButton = () => {
-        if (clicked === "true") {
-            console.log('already liked post')
-        } else {
-            // will allow you to like the post once per session.
-            // check if user has already liked the post
-            let usersLiked = post.usersLiked;
+        let usersLiked = post.usersLiked;
 
-            if (alreadyLiked === "false") {
-                if (user.id === undefined) {
-                    console.log('not logged in');
-                } else {
-                    usersLiked.push(user.id)
-                    axios.put(`/api/posts/postLike/${post._id}`, { usersLiked })
-                        .then(res => {
-                            console.log(res);
-                            console.log(res.data);
-                        })
-                    setClick("true");
-                    setButtonColor("rgb(196, 141, 41)");
-                }
+        if (user.id === undefined) {
+            console.log("user not logged in");
+        } else {
+            if (clicked === "true") {
+                unLikePost(usersLiked, user.id);
+                console.log(user.id)
+                axios.put(`/api/posts/postLike/${post._id}`, { usersLiked })
+                    .then(res => {
+                        console.log('removed user from liked post');
+                    })
+                setClick("false");
+            } else {
+                // will allow you to like the post once per session.
+                // check if user has already liked the post
+                usersLiked.push(user.id)
+                console.log(user.id)
+                axios.put(`/api/posts/postLike/${post._id}`, { usersLiked })
+                    .then(res => {
+                        console.log("added user to liked post");
+                    })
+                setClick("true");
             }
+        }
+    }
+
+    const unLikePost = (arr, id) => {
+        let user = arr.indexOf(id);
+
+        while (user !== -1) {
+            arr.splice(user, 1);
+            user = arr.indexOf(id);
         }
     }
 
@@ -73,28 +87,11 @@ const Card = ({ post, user }) => {
                             <p className="post-description">{post.description}</p>
                         </div>
                         <div>
-                            {alreadyLiked === "false" && countUserLikes === 0 &&
-                                <button onClick={() => clickedLikeButton()} className="icon-like-button" style={{ border: "none", backgroundColor: "transparent" }}><i class="far fa-thumbs-up" style={{ paddingBottom: "20px", color: buttonColor }}>
-                                    {clicked === "false" &&
-                                        <span> {countUserLikes} likes </span>
-                                    }
-                                    {clicked === "true" &&
-                                        <span> 1 likes </span>
-                                    }
-                                </i></button>
+                            {clicked === "true" &&
+                                <button disabled={diableButton === "true"} onClick={() => clickedLikeButton(setClick(!clicked), setCountUserLikes(countUserLikes - 1))} className="icon-like-button" style={{ border: "none", backgroundColor: "transparent" }}><i class="far fa-thumbs-up" style={{ paddingBottom: "20px", color: "rgb(196, 141, 41)" }}> {countUserLikes} likes </i></button>
                             }
-                            {alreadyLiked === "false" && countUserLikes > 0 &&
-                                <button onClick={() => clickedLikeButton()} className="icon-like-button" style={{ border: "none", backgroundColor: "transparent" }}><i class="far fa-thumbs-up" style={{ paddingBottom: "20px", color: buttonColor }}>
-                                    {clicked === "false" &&
-                                        <span> {countUserLikes} likes </span>
-                                    }
-                                    {clicked === "true" &&
-                                        <span> {countUserLikes + 1} likes </span>
-                                    }
-                                </i></button>
-                            }
-                            {alreadyLiked === "true" &&
-                                <button onClick={() => clickedLikeButton()} className="icon-like-button" style={{ border: "none", backgroundColor: "transparent" }}><i class="far fa-thumbs-up" style={{ paddingBottom: "20px", color: "rgb(196, 141, 41)" }}> {countUserLikes} likes </i></button>
+                            {clicked === "false" &&
+                                <button disabled={diableButton === "true"} onClick={() => clickedLikeButton(setClick(!clicked), setCountUserLikes(countUserLikes + 1))} className="icon-like-button" style={{ border: "none", backgroundColor: "transparent" }}><i class="far fa-thumbs-up" style={{ paddingBottom: "20px", color: "black" }}> {countUserLikes} likes </i></button>
                             }
                         </div>
                     </div>
@@ -128,28 +125,11 @@ const Card = ({ post, user }) => {
                             }}>Purchase Product</Link>
                         </div>
                         <div>
-                            {alreadyLiked === "false" && countUserLikes === 0 &&
-                                <button onClick={() => clickedLikeButton()} className="icon-like-button" style={{ border: "none", backgroundColor: "transparent" }}><i class="far fa-thumbs-up" style={{ paddingBottom: "20px", color: buttonColor }}>
-                                    {clicked === "false" &&
-                                        <span> {countUserLikes} likes </span>
-                                    }
-                                    {clicked === "true" &&
-                                        <span> 1 likes </span>
-                                    }
-                                </i></button>
+                            {clicked === "true" &&
+                                <button disabled={diableButton === "true"} onClick={() => clickedLikeButton(setClick(!clicked), setCountUserLikes(countUserLikes - 1))} className="icon-like-button" style={{ border: "none", backgroundColor: "transparent" }}><i class="far fa-thumbs-up" style={{ paddingBottom: "20px", color: "rgb(196, 141, 41)" }}> {countUserLikes} likes </i></button>
                             }
-                            {alreadyLiked === "false" && countUserLikes > 0 &&
-                                <button onClick={() => clickedLikeButton()} className="icon-like-button" style={{ border: "none", backgroundColor: "transparent" }}><i class="far fa-thumbs-up" style={{ paddingBottom: "20px", color: buttonColor }}>
-                                    {clicked === "false" &&
-                                        <span> {countUserLikes} likes </span>
-                                    }
-                                    {clicked === "true" &&
-                                        <span> {countUserLikes + 1} likes </span>
-                                    }
-                                </i></button>
-                            }
-                            {alreadyLiked === "true" &&
-                                <button onClick={() => clickedLikeButton()} className="icon-like-button" style={{ border: "none", backgroundColor: "transparent" }}><i class="far fa-thumbs-up" style={{ paddingBottom: "20px", color: "rgb(196, 141, 41)" }}> {countUserLikes} likes </i></button>
+                            {clicked === "false" &&
+                                <button disabled={diableButton === "true"} onClick={() => clickedLikeButton(setClick(!clicked), setCountUserLikes(countUserLikes + 1))} className="icon-like-button" style={{ border: "none", backgroundColor: "transparent" }}><i class="far fa-thumbs-up" style={{ paddingBottom: "20px", color: "black" }}> {countUserLikes} likes </i></button>
                             }
                         </div>
                     </div>
@@ -171,5 +151,5 @@ const mapStateToProps = state => ({
 
 export default connect(
     mapStateToProps,
-    {  }
+    {}
 )(Card);
