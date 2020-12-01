@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { Component, useState } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Grid from "@material-ui/core/Grid";
 import Paper from "@material-ui/core/Paper";
@@ -11,6 +11,13 @@ import CardActionArea from '@material-ui/core/CardActionArea';
 import CardActions from '@material-ui/core/CardActions';
 import Button from '@material-ui/core/Button';
 import { connect } from "react-redux";
+import { Fab} from "@material-ui/core";
+import AddIcon from '@material-ui/icons/Add';
+import Radio from '@material-ui/core/Radio';
+import RadioGroup from '@material-ui/core/RadioGroup';
+import FormControlLabel from '@material-ui/core/FormControlLabel';
+import FormControl from '@material-ui/core/FormControl';
+import FormLabel from '@material-ui/core/FormLabel';
 const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
@@ -43,8 +50,22 @@ function ComplexGrid(props) {
   const classes = useStyles();
 
   const { user } = props.auth;
+  const [profileImage,setProfileImage] =useState(null)
   
- 
+  const fileChange = e => {
+   // this.setState({
+    //  photo: e.target.files[0]
+    ////});
+   setProfileImage(e.target.files[0]) 
+   console.log(e.target.files)
+   console.log(profileImage)
+  }
+ const onSubmit = e => {
+    e.preventDefault();
+    // create form as we are using the formidable package on backend
+    let formData = new FormData();
+    // add data from state to form   
+  };
  
   return (
    
@@ -65,8 +86,30 @@ function ComplexGrid(props) {
                 />
                 <CardActions>
                   
-                
-                <input type="file" />
+              
+                <label className="photo-style">
+                <input
+                  style={{ display: "none" }}
+                  onChange={fileChange}
+                  //error={errors.photo}
+                  type='file'
+                  name='highlight2'
+                  id="highlight2"
+                  //className={classnames("", {
+                   // invalid: errors.photo
+                 // })}
+                />
+                <Fab
+                  color="default"
+                  size="small"
+                  component="span"
+                  aria-label="add"
+                  variant="extended"
+                >
+                  <AddIcon /> 
+                </Fab>
+                <Button>Upload </Button>
+              </label>
                 
       
                </CardActions>
@@ -92,9 +135,13 @@ function ComplexGrid(props) {
                   <div>
                     <label>
                       Farmer:
-                      <button>Yes</button><button>No</button>
+                       <RadioGroup aria-label="gender" name="gender1" > 
+        <FormControlLabel value="yes" control={<Radio />} label="Yes" />
+        <FormControlLabel value="no" control={<Radio />} label="No" />
+        
+      </RadioGroup>
                   </label>
-                  <button>Yes</button><button>No</button>
+                  
                   </div>
 
                 </div>
