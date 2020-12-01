@@ -82,7 +82,7 @@ function ComplexGrid(props) {
                   <div>
                     User Profile
                </div>
-
+                
                   <div>
                     <label>  Name:{user.name} </label>
                   </div>
@@ -92,6 +92,7 @@ function ComplexGrid(props) {
                   <div>
                     <label>
                       Farmer:
+                      <button>Yes</button><button>No</button>
                   </label>
                   <button>Yes</button><button>No</button>
                   </div>
