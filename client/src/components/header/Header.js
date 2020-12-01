@@ -41,7 +41,6 @@ const Header = () => {
             return false;
         }
     }
-
     const classes = useStyles()
     return (
         <Box className={classes.typedContainer}>

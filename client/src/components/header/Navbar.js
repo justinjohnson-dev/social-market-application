@@ -8,11 +8,8 @@ import {
     IconButton,
     ListItemText,
     ListItemIcon,
-    Avatar,
-    Grid,
     Divider,
     List,
-    Typography,
     Box
 } from "@material-ui/core";
 import {
@@ -71,7 +68,6 @@ const Navbar = () => {
     const [state, setState] = useState({
         left: false
     })
-
     const toggleSlider = (slider, open) => () => {
         setState({ ...state, [slider]: open });
     }
@@ -106,14 +102,11 @@ const Navbar = () => {
                             <ArrowBack style={{ color: "#222" }} />
                             <i class="fas fa-carrot"></i>
                         </IconButton>
-
-
                         <MobileRightMenuSlider
                             anchor="left"
                             open={state.left}
                         >
                             {sideList("left")}
-
                         </MobileRightMenuSlider>
                     </Toolbar>
                 </AppBar>

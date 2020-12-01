@@ -36,11 +36,12 @@ class GetPost extends Component {
     }
 
     render() {
+        const { user } = this.props.auth;
         return (
             <div className="main-container">
                 <h2 className="mb-4 title home-page-title-styling">User Posts</h2>
                 <div className="row">
-                    {this.state.loadPosts.map((post, index) => (<Card key={index} post={post} />))}
+                    {this.state.loadPosts.map((post, index) => (<Card key={index} post={post} user={user} />))}
                 </div>
             </div>
         );

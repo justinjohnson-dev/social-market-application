@@ -119,3 +119,15 @@
 .card {
     background-color: whitesmoke;
 }
+
+.fa-thumbs-up:hover {
+    color: rgb(196, 141, 41);
+}
+
+.icon-like-button {
+    font-size: 15px;
+}
+
+.icon-like-button:hover {
+    font-size: 16px;
+}
