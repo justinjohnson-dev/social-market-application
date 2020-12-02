@@ -7,8 +7,10 @@ const keys = require("../../config/config");
 const validateSignUpInput = require("../../validation/signup")
 const validateLoginInput = require("../../validation/login");
 // Load User model
+const fs = require('fs');
 const User = require("../../models/user");
 
+const formidable = require('formidable');
 router.post("/signup", (req, res) => {
     // Form validation
     const { errors, isValid } = validateSignUpInput(req.body);
@@ -113,6 +115,40 @@ router.get('/user/:userId', async (req, res) => {
         res.json({ message: "No user found" });
     }
 });
+router.post('/updateProfile/:userId',async(req,res)=>{
+    let form = new formidable.IncomingForm()
+    form.keepExtensions = true
+    form.parse(req, async (err, fields, files) => {
+        // Form validation
+       // const { errors, isValid } = validatePostInput(fields, files);
+       // console.log(files);
+        // Check validation
+       
+        if (err) {
+            return res.status(400).json({
+                error: "Image could not be uploaded"
+            });
+        }
+        // Check to make sure all fields are filled out
+        let user = await User.findById(""+req.params.userId)
+        if (files.photo) {          
+           user.photo.data = fs.readFileSync(files.photo.path)
+           user.photo.contentType = files.photo.type
+           await user.save()
+           res.json(user);
+        }
+}) })
 
+photo = async (req, res, next) => {
+    console.log("iam hit")
+    let user = await User.findById(req.params.userId)
+    if (user && user.photo && user.photo.data) {
+        res.set('Content-Type', user.photo.contentType);
+        return res.send(user.photo.data);
+    } else{
+        return res.send(null); }
 
+    next();
+};
+router.get('/user/photo/:userId', photo)
 module.exports = router;

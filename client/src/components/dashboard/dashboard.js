@@ -18,6 +18,9 @@ import RadioGroup from '@material-ui/core/RadioGroup';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import FormControl from '@material-ui/core/FormControl';
 import FormLabel from '@material-ui/core/FormLabel';
+import GetPost from './fetchPostFarmer'
+import GetLikedPost from './fetchLIkedPosts'
+import axios from "axios";
 const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
@@ -51,19 +54,32 @@ function ComplexGrid(props) {
 
   const { user } = props.auth;
   const [profileImage,setProfileImage] =useState(null)
+  const [preview,setPreview] =useState(`/api/users/user/photo/${user.id}`)
+  const [loader,setLoader] = useState(false)
   
   const fileChange = e => {
    // this.setState({
     //  photo: e.target.files[0]
     ////});
    setProfileImage(e.target.files[0]) 
-   console.log(e.target.files)
-   console.log(profileImage)
+   setPreview(URL.createObjectURL(e.target.files[0]))
+   //readURL(e.target.files[0])
   }
- const onSubmit = e => {
+
+ const onSubmit = async  e => {
     e.preventDefault();
     // create form as we are using the formidable package on backend
     let formData = new FormData();
+    formData.append('photo',profileImage);
+    setLoader(true)
+   await axios
+    .post("/api/users/updateProfile/"+user.id,formData)
+    .catch(err =>
+       alert('something went wrong')
+    );
+    setPreview(`/api/users/user/photo/${user.id}`)
+    setLoader(false)
+    
     // add data from state to form   
   };
  
@@ -81,7 +97,7 @@ function ComplexGrid(props) {
                   component="img"
                   alt="Contemplative Reptile"
                   height="140"
-                  image="https://cdn.pixabay.com/photo/2016/08/08/09/17/avatar-1577909_960_720.png"
+                  image={preview||"https://cdn.pixabay.com/photo/2016/08/08/09/17/avatar-1577909_960_720.png"}
 
                 />
                 <CardActions>
@@ -108,7 +124,7 @@ function ComplexGrid(props) {
                 >
                   <AddIcon /> 
                 </Fab>
-                <Button>Upload </Button>
+             
               </label>
                 
       
@@ -127,7 +143,7 @@ function ComplexGrid(props) {
                </div>
                 
                   <div>
-                    <label>  Name:{user.name} </label>
+                    <label>  Name: {user.name} </label>
                   </div>
                   <div>
                     <label> Email: {user.email} </label>
@@ -135,7 +151,7 @@ function ComplexGrid(props) {
                   <div>
                     <label>
                       Farmer:
-                       <RadioGroup aria-label="gender" name="gender1" > 
+                       <RadioGroup aria-label="farmer" name="notfarmer" > 
         <FormControlLabel value="yes" control={<Radio />} label="Yes" />
         <FormControlLabel value="no" control={<Radio />} label="No" />
         
@@ -145,8 +161,8 @@ function ComplexGrid(props) {
                   </div>
 
                 </div>
-                <Button variant="contained" color="primary" disableElevation>
-                  Edit
+                <Button variant="contained" color="primary" onClick={onSubmit} >
+                {loader? "...":"Upload"} 
                 </Button>
               </Grid>
             </Grid>
@@ -158,72 +174,13 @@ function ComplexGrid(props) {
    
     </div>
     <div className={classes.root}>
-   <Paper className={classes.paper} >
-    <Grid container>
-      <Grid item md={4}>
-      
-      </Grid>
-      <Grid item md={8}>
-      <Grid item xs>
-                <div className={classes.formContent}>
-                  <div>
-                    Purchases
-               </div>
-
-                  <div>
-                    <label> Name of Farm: </label>
-                  </div>
-                  <div>
-                    <label> Date Purchased:  </label>
-                  </div>
-                  <div>
-                    <label>
-                      Number of Order Forms:
-                  </label>
-                  </div>
-
-                </div>
-                <Button variant="contained" color="primary" disableElevation>
-                  Save
-</Button>
-              </Grid>
-      </Grid>
-    </Grid>
-  </Paper>
+   <GetLikedPost/>
   </div>
    <div className={classes.root}>
-  <Paper className={classes.paper} >
-    <Grid container>
-      <Grid item md={4}>
-
-      </Grid>
-      <Grid item md={8}>
-      <Grid item xs>
-                <div className={classes.formContent}>
-                  <div>
-                    Payment Information
-               </div>
-                  <div>
-                    <label>  Name: </label>
-                  </div>
-                  <div>
-                    <label> Card Number: </label>
-                  </div>
-                  <div>
-                    <label>
-                      Exp. Date:
-                  </label>
-                  </div>
-
-                </div>
-                <Button variant="contained" color="primary" disableElevation>
-                  Edit
-</Button>
-              </Grid>
-      </Grid>
-    </Grid>
-  </Paper>
+              
+               <GetPost />       
   </div>
+  
 </div>
   );
 }

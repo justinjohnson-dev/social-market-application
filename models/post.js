@@ -33,6 +33,10 @@ const postSchema = new Schema({
         type: String,
         trim: true
     },
+    userId: {
+        type: String,
+        trim: true
+    },
     usersLiked: {
         type: Array,
         trim: true
