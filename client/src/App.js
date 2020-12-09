@@ -22,6 +22,7 @@ import tester from './components/signup/test';
 import purchase from './components/purchaseScreen/purchase';
 import notification from './components/notification/notification';
 import userNotification from './components/notification/userNotification';
+import Footer from './components/Footer/Footer';
 
 
 // Check for token to keep user logged in
@@ -46,7 +47,9 @@ if (localStorage.jwtToken) {
 class App extends Component {
   render() {
     return (
-      <Provider store={store}>
+      <>
+    <div className = "Content">
+        <Provider store={store}>
         <Router>
           <div className="App">
             <Navbar />
@@ -69,6 +72,10 @@ class App extends Component {
           </div>
         </Router>
       </Provider>
+      </div>
+  <Footer className = "Footer" />
+
+  </>
     );
   }
 }
