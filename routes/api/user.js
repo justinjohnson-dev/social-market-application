@@ -9,12 +9,13 @@ const validateLoginInput = require("../../validation/login");
 // Load User model
 const fs = require('fs');
 const User = require("../../models/user");
+const Farmer = require("../../models/farmer");
 
 const formidable = require('formidable');
 router.post("/signup", (req, res) => {
     // Form validation
     const { errors, isValid } = validateSignUpInput(req.body);
-    const { name, email, password } = req.body;
+    const { name, email, password, farmer } = req.body;
 
     // Check validation
     if (!isValid) {
@@ -44,6 +45,33 @@ router.post("/signup", (req, res) => {
             });
         }
     });
+
+    if (farmer === "Yes") {
+        Farmer.findOne({ email }).then(userFarmer => {
+            if (userFarmer) {
+                return res.status(400).json({ email: "Email Already Exists" });
+            } else {
+                const newFarmer = new Farmer({
+                    name,
+                    email,
+                    password,
+                    farmer
+                });
+
+                // Hash password before saving in database
+                bcrypt.genSalt(10, (err, salt) => {
+                    bcrypt.hash(newFarmer.password, salt, (err, hash) => {
+                        if (err) throw err;
+                        newFarmer.password = hash;
+                        newFarmer
+                            .save()
+                            .then(userFarmer => res.json(userFarmer))
+                            .catch(err => console.log(err));
+                    });
+                });
+            }
+        });
+    }
 });
 
 
@@ -73,7 +101,7 @@ router.post("/signin", (req, res) => {
                 const payload = {
                     id: user.id,
                     name: user.name,
-                    email:user.email
+                    email: user.email
                 };
                 // Sign token
                 jwt.sign(
@@ -115,29 +143,31 @@ router.get('/user/:userId', async (req, res) => {
         res.json({ message: "No user found" });
     }
 });
-router.post('/updateProfile/:userId',async(req,res)=>{
+
+router.post('/updateProfile/:userId', async (req, res) => {
     let form = new formidable.IncomingForm()
     form.keepExtensions = true
     form.parse(req, async (err, fields, files) => {
         // Form validation
-       // const { errors, isValid } = validatePostInput(fields, files);
-       // console.log(files);
+        // const { errors, isValid } = validatePostInput(fields, files);
+        // console.log(files);
         // Check validation
-       
+
         if (err) {
             return res.status(400).json({
                 error: "Image could not be uploaded"
             });
         }
         // Check to make sure all fields are filled out
-        let user = await User.findById(""+req.params.userId)
-        if (files.photo) {          
-           user.photo.data = fs.readFileSync(files.photo.path)
-           user.photo.contentType = files.photo.type
-           await user.save()
-           res.json(user);
+        let user = await User.findById("" + req.params.userId)
+        if (files.photo) {
+            user.photo.data = fs.readFileSync(files.photo.path)
+            user.photo.contentType = files.photo.type
+            await user.save()
+            res.json(user);
         }
-}) })
+    })
+})
 
 photo = async (req, res, next) => {
     console.log("iam hit")
@@ -145,8 +175,9 @@ photo = async (req, res, next) => {
     if (user && user.photo && user.photo.data) {
         res.set('Content-Type', user.photo.contentType);
         return res.send(user.photo.data);
-    } else{
-        return res.send(null); }
+    } else {
+        return res.send(null);
+    }
 
     next();
 };

@@ -134,8 +134,8 @@ list = (req, res) => {
     // need to parse limit to an integer for query
     let limit = req.query.limit ? parseInt(req.query.limit) : 10;
     let search = {}
-    if(req.query.id){
-        search= {userId:req.query.id}
+    if (req.query.id) {
+        search = { userId: req.query.id }
     }
     Post.find(search)
         .select("-photo")
@@ -169,8 +169,8 @@ getLiked = (req, res) => {
     // need to parse limit to an integer for query
     let limit = req.query.limit ? parseInt(req.query.limit) : 10;
     let search = {}
-    if(req.query.id){
-        search= { usersLiked:{$elemMatch:{$eq:req.query.id}}}
+    if (req.query.id) {
+        search = { usersLiked: { $elemMatch: { $eq: req.query.id } } }
     }
     Post.find(search)
         .select("-photo")

@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 //create schema for name
-const userSchema = new Schema({
+const farmerSchema = new Schema({
     name: {
         type: String,
         trim: true,
@@ -23,10 +23,6 @@ const userSchema = new Schema({
         type: String,
         required: true
     },
-    farmer: {
-        type: String,
-        trim: true
-    },
     history: {
         type: Array,
         default: []
@@ -34,5 +30,5 @@ const userSchema = new Schema({
 }, { timestamps: true }
 );
 
-//create model for name
-module.exports = User = mongoose.model('user', userSchema);
+//create model for farmer
+module.exports = Farmer = mongoose.model('farmer', farmerSchema);
