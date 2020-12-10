@@ -63,6 +63,7 @@ class Login extends Component {
             type="email"
             id="email"
             label="Email"
+            InputProps={{ disableUnderline: true }}
             className={classnames("", {
               invalid: errors.email || errors.emailnotfound
             })}
@@ -80,6 +81,7 @@ class Login extends Component {
             type="password"
             id="password"
             label="Password"
+            InputProps={{ disableUnderline: true }}
             className={classnames("", {
               invalid: errors.password || errors.passwordincorrect
             })}
