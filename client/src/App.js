@@ -21,6 +21,7 @@ import Home from './components/home/home';
 import purchase from './components/purchaseScreen/purchase';
 import notification from './components/notification/notification';
 import userNotification from './components/notification/userNotification';
+import Footer from './components/Footer/Footer';
 
 
 // Check for token to keep user logged in
@@ -45,6 +46,8 @@ if (localStorage.jwtToken) {
 class App extends Component {
   render() {
     return (
+<>
+<div className = "Conent">
       <Provider store={store}>
         <Router>
           <div className="App">
@@ -67,6 +70,10 @@ class App extends Component {
           </div>
         </Router>
       </Provider>
+      </div>
+      <Footer className = "Footer" />
+      </>
+
     );
   }
 }
