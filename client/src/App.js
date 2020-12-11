@@ -12,16 +12,17 @@ import Navigation from './components/navigation/navigation';
 import PrivateRoute from './components/private-route/privateroute';
 import Dashboard from './components/dashboard/dashboard';
 import JoinChat from './components/chat/JoinChat/JoinChat';
-import Chat from './components/chat/Chat';
 import post from './components/createPost/post';
 import getPost from './components/createPost/fetchPost';
 import Header from './components/header/Header';
 import Navbar from './components/header/Navbar';
 import Home from './components/home/home';
-import tester from './components/signup/test';
 import purchase from './components/purchaseScreen/purchase';
 import notification from './components/notification/notification';
 import userNotification from './components/notification/userNotification';
+import ChatRedux from './components/chat/ChatRedux';
+import Footer from './components/Footer/Footer';
+
 
 
 // Check for token to keep user logged in
@@ -46,6 +47,8 @@ if (localStorage.jwtToken) {
 class App extends Component {
   render() {
     return (
+    <>
+      <div className = "Conent">
       <Provider store={store}>
         <Router>
           <div className="App">
@@ -56,9 +59,8 @@ class App extends Component {
             <Route exact path="/signup" component={Signup} />
             <Route exact path="/signin" component={Login} />
             <Route exact path="/JoinChat" component={JoinChat} />
-            <Route exact path="/chat" component={Chat} />
+            <Route exact path="/chat" component={ChatRedux} />
             <Route exact path="/getPost" component={getPost} />
-            <Route exact path="/testt" component={tester} />
             <Switch>
               <PrivateRoute exact path="/dashboard" component={Dashboard} />
               <PrivateRoute exact path="/post" component={post} />
@@ -69,6 +71,9 @@ class App extends Component {
           </div>
         </Router>
       </Provider>
+      </div>
+      <Footer className = "Footer" />
+    </>  
     );
   }
 }
