@@ -14,13 +14,16 @@ import { getChatRoom } from '../actions/chatActions';
 import './Chat.css';
 
 let socket;
-const PORT = process.env.NODE_ENV === 'production' ? (process.env.PORT || "localhost:80") : "localhost:5000";
+const PORT = process.env.NODE_ENV === 'production' ? (process.env.PORT || "http://homegrownsocialapp.com") : "http://homegrownsocialapp.com";
+console.log(PORT);
+console.log(PORT);
+console.log(PORT);
 
 class ChatRedux extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            user: "",    
+            user: "",
             roomName: "",
             roomUsers: [],
             message: "",
@@ -40,13 +43,13 @@ class ChatRedux extends Component {
     }
 
     //gets a chat room from the db by the name of the room
-    getChatRoom = (roomName)=>{
+    getChatRoom = (roomName) => {
         return axios
             .get(`api/chatRoom/getChatRoom/${roomName}`)
             .then(response => {
 
                 //set state of chat room to be response data
-                this.setState({chatRoom: response.data})
+                this.setState({ chatRoom: response.data })
                 //gets chats by reference to id of chat object housed in chat room document
                 this.getChats(response.data._id);
             })
@@ -54,10 +57,10 @@ class ChatRedux extends Component {
     }
 
     //gets a chat history from the db by the name of the room
-    getChats = (roomId)=>{
-         axios
+    getChats = (roomId) => {
+        axios
             .get(`api/chat/getChats/${roomId}`)
-            .then(response => this.setState({messages: [...this.state.messages,  ...response.data]}))
+            .then(response => this.setState({ messages: [...this.state.messages, ...response.data] }))
             .catch(error => console.log(error.message))
     }
 
@@ -65,14 +68,14 @@ class ChatRedux extends Component {
     componentDidMount() {
 
         //recieve location and set constants to parsed values of user and room name from url
-        const {location} = this.props;
-        const {user, roomName} = queryString.parse(location.search);
+        const { location } = this.props;
+        const { user, roomName } = queryString.parse(location.search);
 
         //http request to get the specific room id by room name
         this.getChatRoom(roomName);
 
         //set state of user, roomname - triggers re-render
-        this.setState({user, roomName})
+        this.setState({ user, roomName })
 
         //socket connection
         socket = io(PORT);
@@ -80,48 +83,48 @@ class ChatRedux extends Component {
         //join info to 
         socket.emit('join', { name: user, room: roomName }, (error) => {
 
-            if(error) {
-              alert(error);
+            if (error) {
+                alert(error);
             }
-            
+
         });
 
         //on mount
-        socket.on('message', message => { 
+        socket.on('message', message => {
 
             //sets state of messages, adds
-            this.setState({messages: [...this.state.messages, message]});
-            });
-    
-        }
+            this.setState({ messages: [...this.state.messages, message] });
+        });
+
+    }
 
     //on unmount
-    componentWillUnmount(){
+    componentWillUnmount() {
 
         socket.off()
 
     }
 
     //set message
-    setMessage = ( {message} ) => {
+    setMessage = ({ message }) => {
 
         this.setState({
             message: message
-        })     
+        })
 
     }
 
     //set message
-    setMessages = ({message}) => {
+    setMessages = ({ message }) => {
 
         this.setState({
-            messages: [...this.state.messages,message]
+            messages: [...this.state.messages, message]
         })
 
     }
-    
+
     //send
-    sendMessage = (message) => {  
+    sendMessage = (message) => {
 
         if (message) {
 
@@ -139,23 +142,23 @@ class ChatRedux extends Component {
 
             //emit to users
             socket.emit('sendMessage', chat);
-            
+
         }
     }
 
     render() {
 
-        const {roomName, messages, message, user} = this.state;
+        const { roomName, messages, message, user } = this.state;
 
         return (
 
             <div className="outerContainer">
                 <div className='container'>
-                    <RoomInfo roomName={roomName}/>
-                    
-                    <Messages messages={messages} user={user}/>
+                    <RoomInfo roomName={roomName} />
 
-                    <TextInput message={message} setMessage={this.setMessage} sendMessage={this.sendMessage}/>
+                    <Messages messages={messages} user={user} />
+
+                    <TextInput message={message} setMessage={this.setMessage} sendMessage={this.sendMessage} />
                 </div>
             </div>
 
@@ -163,8 +166,8 @@ class ChatRedux extends Component {
     }
 }
 
-ChatRedux.propTypes = {    
-    auth: PropTypes.object.isRequired, 
+ChatRedux.propTypes = {
+    auth: PropTypes.object.isRequired,
 };
 
 const mapStateToProps = (state) => ({
@@ -175,5 +178,5 @@ const mapStateToProps = (state) => ({
 
 export default connect(
     mapStateToProps,
-    { getChatRoom}
+    { getChatRoom }
 )(withRouter(ChatRedux));
