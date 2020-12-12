@@ -14,7 +14,10 @@ import { getChatRoom } from '../actions/chatActions';
 import './Chat.css';
 
 let socket;
-const PORT = process.env.NODE_ENV === 'production' ? (process.env.PORT || "localhost:80") : "localhost:5000";
+const PORT = process.env.NODE_ENV === 'production' ? (process.env.PORT || "localhost:80") : "homegrownsocialapp";
+console.log(PORT);
+console.log(PORT);
+console.log(PORT);
 
 class ChatRedux extends Component {
     constructor(props) {
