@@ -96,12 +96,14 @@ class Post extends Component {
         // will be tied to orders later on
         const farmerID = this.findFarmerEmail();
         formData.append('farmerId', farmerID);
+        
       }
     }
     formData.append('farmer', this.state.farmer);
-
+    let userId = this.findFarmerEmail();
+    formData.append('userId',userId)
     this.props.createPost(formData);
-
+ 
     if (this.state.description !== '' && this.state.location !== '') {
       console.log('push to homepage')
       this.props.history.push('/');

@@ -34,3 +34,7 @@ form {
 .password-div, .name-div, .email-div {
     margin: 0px auto;
 }
+
+.dropdown-farmer-div {
+    padding-top: 15px;
+}

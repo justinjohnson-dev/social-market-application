@@ -6,6 +6,10 @@ import { registerUser } from "../actions/authActions";
 import classnames from "classnames";
 import { Button } from "@material-ui/core";
 import TextField from '@material-ui/core/TextField';
+import InputLabel from '@material-ui/core/InputLabel';
+import MenuItem from '@material-ui/core/MenuItem';
+import FormControl from '@material-ui/core/FormControl';
+import Select from '@material-ui/core/Select';
 import './signup.css';
 
 
@@ -16,6 +20,7 @@ class Signup extends Component {
             name: "",
             email: "",
             password: "",
+            farmer: "No",
             errors: {}
         };
     }
@@ -39,12 +44,17 @@ class Signup extends Component {
         this.setState({ [e.target.id]: e.target.value });
     };
 
+    onDropChange = e => {
+        this.setState({ farmer: e.target.value });
+    }
+
     onSubmit = e => {
         e.preventDefault();
         const newUser = {
             name: this.state.name,
             email: this.state.email,
-            password: this.state.password
+            password: this.state.password,
+            farmer: this.state.farmer,
         };
         this.props.registerUser(newUser, this.props.history);
     };
@@ -62,6 +72,7 @@ class Signup extends Component {
                         type="text"
                         id="name"
                         label="Name"
+                        InputProps={{ disableUnderline: true }}
                         className={classnames("", {
                             invalid: errors.name
                         })}
@@ -76,6 +87,7 @@ class Signup extends Component {
                         type="email"
                         id="email"
                         label="Email"
+                        InputProps={{ disableUnderline: true }}
                         className={classnames("", {
                             invalid: errors.email
                         })}
@@ -91,11 +103,26 @@ class Signup extends Component {
                         type="password"
                         id="password"
                         label="Password"
+                        InputProps={{ disableUnderline: true }}
                         className={classnames("", {
                             invalid: errors.password
                         })}
                     />
                     <p className="red-text">{errors.email}</p>
+                </div>
+                <div className="dropdown-farmer-div">
+                    <FormControl style={{ width: "190px", width: "195px" }}>
+                        <InputLabel style={{ fontSize: "20px" }} id="demo-simple-select-label">Farmer</InputLabel>
+                        <Select
+                            id="status"
+                            value={this.state.farmer}
+                            onChange={this.onDropChange}
+                            fullWidth="true"
+                        >
+                            <MenuItem value={"Yes"}>Yes</MenuItem>
+                            <MenuItem value={"No"}>No</MenuItem>
+                        </Select>
+                    </FormControl>
                 </div>
                 <div className="button-div">
                     <Link to="/" className="btn-flat waves-effect">

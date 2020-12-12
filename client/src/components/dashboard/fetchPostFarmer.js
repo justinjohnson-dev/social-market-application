@@ -1,9 +1,9 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import { getPosts } from './postApi'
-import Card from './postCard'
-import './post.css';
+import { getPostsById } from '../../components/createPost/postApi'
+import Card from '../../components/createPost/postCard'
+import './postFarmer.css';
 
 
 class GetPost extends Component {
@@ -17,12 +17,14 @@ class GetPost extends Component {
     }
 
     componentDidMount() {
+       
         // FETCH data
         this.loadPostsByCreatedAt();
     }
 
     loadPostsByCreatedAt() {
-        getPosts('createdAt').then(data => {
+        const { user } = this.props.auth;
+        getPostsById(user.id,'createdAt').then(data => {
             if (data.error) {
                 this.setState({
                     error: data.error
@@ -39,7 +41,7 @@ class GetPost extends Component {
         const { user } = this.props.auth;
         return (
             <div className="main-container">
-                <h2 className="mb-4 title home-page-title-styling">User Posts</h2>
+                <h2 className="mb-4 title home-page-title-styling">My Posts</h2>
                 <div className="row">
                     {this.state.loadPosts.map((post, index) => (<Card key={index} post={post} user={user} />))}
                 </div>

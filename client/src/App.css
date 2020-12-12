@@ -1,13 +1,13 @@
 .App {
   text-align: center;
 }
+
 html {
   height: 100%;
 }
-
 body {
-  margin: 0;
-  height: 100%;
+margin: 0;
+height: 100%;
 }
 
 #root {
@@ -15,7 +15,6 @@ body {
   display: flex;
   flex-direction: column;
 }
-
 .Content {
   flex: 1 0 auto;
 }
