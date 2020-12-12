@@ -14,7 +14,7 @@ import { getChatRoom } from '../actions/chatActions';
 import './Chat.css';
 
 let socket;
-const PORT = process.env.NODE_ENV === 'production' ? (process.env.PORT || "localhost:80") : "homegrownsocialapp";
+const PORT = process.env.NODE_ENV === 'production' ? (process.env.PORT || "homegrownsocialapp") : "localhost:5000";
 console.log(PORT);
 console.log(PORT);
 console.log(PORT);
