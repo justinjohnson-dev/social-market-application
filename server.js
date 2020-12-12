@@ -186,9 +186,8 @@ if (process.env.NODE_ENV === 'local') {
 }
 
 // start server
-const port = process.env.NODE_ENV === 'production' ? (PORT || 80) : 5000;
-
-const server = app.listen(port, function () {
-  server.listen(port, function () {
+// start server
+const port = process.env.NODE_ENV === 'production' ? (process.env.PORT || 80) : 5000;
+server.listen(port, function () {
   console.log('Server listening on port ' + port);
 });
