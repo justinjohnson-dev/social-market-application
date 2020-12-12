@@ -14,10 +14,7 @@ import { getChatRoom } from '../actions/chatActions';
 import './Chat.css';
 
 let socket;
-// const PORT = process.env.NODE_ENV === 'production' ? (process.env.PORT || "homegrownsocialapp") : "localhost:5000";
-// console.log(PORT);
-// console.log(PORT);
-// console.log(PORT);
+const PORT = process.env.NODE_ENV === 'production' ? (process.env.PORT || "http://homegrownsocialapp.com/") : "localhost:5000";
 
 class ChatRedux extends Component {
     constructor(props) {
@@ -78,7 +75,7 @@ class ChatRedux extends Component {
         this.setState({ user, roomName })
 
         //socket connection
-        socket = io("http://homegrownsocialapp.com/");
+        socket = io(PORT);
 
         //join info to 
         socket.emit('join', { name: user, room: roomName }, (error) => {
