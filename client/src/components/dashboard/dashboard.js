@@ -18,9 +18,9 @@ import RadioGroup from '@material-ui/core/RadioGroup';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import FormControl from '@material-ui/core/FormControl';
 import FormLabel from '@material-ui/core/FormLabel';
-import GetPost from './fetchPostFarmer'
-import GetLikedPost from './fetchLIkedPosts'
+
 import axios from "axios";
+import Tabs from "./Tabs";
 const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
@@ -174,12 +174,16 @@ function ComplexGrid(props) {
    
     </div>
     <div className={classes.root}>
+    <Tabs/>
+    </div>
+    {/* <div className={classes.root}>
    <GetLikedPost/>
   </div>
    <div className={classes.root}>
               
                <GetPost />       
-  </div>
+  </div> */}
+  
   
 </div>
   );
@@ -187,6 +191,15 @@ function ComplexGrid(props) {
 const mapStateToProps = state => ({
   auth: state.auth
 });
+
+function a11yProps(index) {
+  return {
+    id: `simple-tab-${index}`,
+    'aria-controls': `simple-tabpanel-${index}`,
+  };
+}
+
+
 
 export default connect(
   mapStateToProps
