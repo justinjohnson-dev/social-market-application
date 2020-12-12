@@ -46,9 +46,7 @@ class App extends Component {
   render() {
     return (
 <>
-<div className = "Conent">
-    <>
-      <div className = "Conent">
+<div className = "Content">
       <Provider store={store}>
         <Router>
           <div className="App">
