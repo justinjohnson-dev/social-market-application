@@ -63,6 +63,7 @@ class Login extends Component {
             type="email"
             id="email"
             label="Email"
+            InputProps={{ disableUnderline: true }}
             className={classnames("", {
               invalid: errors.email || errors.emailnotfound
             })}
@@ -80,14 +81,15 @@ class Login extends Component {
             type="password"
             id="password"
             label="Password"
+            InputProps={{ disableUnderline: true }}
             className={classnames("", {
               invalid: errors.password || errors.passwordincorrect
             })}
           />
-          <span className="red-text">
+          <p className="red-text">
             {errors.password}
             {errors.passwordincorrect}
-          </span>
+          </p>
         </div>
         <div className="button-div">
           <Link to="/" className="btn-flat waves-effect">

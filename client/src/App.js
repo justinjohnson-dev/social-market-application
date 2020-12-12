@@ -23,8 +23,6 @@ import userNotification from './components/notification/userNotification';
 import ChatRedux from './components/chat/ChatRedux';
 import Footer from './components/Footer/Footer';
 
-
-
 // Check for token to keep user logged in
 if (localStorage.jwtToken) {
   // Set auth token header auth
@@ -47,6 +45,8 @@ if (localStorage.jwtToken) {
 class App extends Component {
   render() {
     return (
+<>
+<div className = "Conent">
     <>
       <div className = "Conent">
       <Provider store={store}>
@@ -73,7 +73,7 @@ class App extends Component {
       </Provider>
       </div>
       <Footer className = "Footer" />
-    </>  
+      </>
     );
   }
 }

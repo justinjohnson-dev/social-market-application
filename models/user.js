@@ -9,6 +9,10 @@ const userSchema = new Schema({
         required: true,
         maxlength: 32
     },
+    photo: {
+        data: Buffer,
+        contentType: String
+    },
     email: {
         type: String,
         trim: true,
@@ -18,6 +22,10 @@ const userSchema = new Schema({
     password: {
         type: String,
         required: true
+    },
+    farmer: {
+        type: String,
+        trim: true
     },
     history: {
         type: Array,

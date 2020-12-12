@@ -5,7 +5,7 @@ const fs = require('fs');
 // Load Post model
 const Post = require("../../models/post");
 const validatePostInput = require("../../validation/post")
-
+const mongoose = require('mongoose');
 router.post("/createpost", (req, res) => {
     // using the formidable package to handle
     // Images coming from form
@@ -71,6 +71,34 @@ router.post("/createpost", (req, res) => {
     });
 });
 
+router.put("/postLike/:id", (req, res) => {
+    let id = req.params.id;
+    const usersLiked = req.body.usersLiked
+
+    // find and save updated post
+    Post.findOne({ _id: id }, function (err, foundOject) {
+        if (err) {
+            console.log(err)
+            res.status(500).send()
+        } else {
+            if (!foundOject) {
+                res.status(404).send();
+            } else {
+                foundOject.usersLiked = usersLiked;
+
+                foundOject.save(function (err, updatedObject) {
+                    if (err) {
+                        console.log(err);
+                        res.status(500).send();
+                    } else {
+                        res.send(updatedObject);
+                    }
+                })
+            }
+        }
+    });
+})
+
 // Viewing any posts photo, using the content-type we created in schema
 photo = (req, res, next) => {
     console.log(req.post.photo.data);
@@ -105,7 +133,11 @@ list = (req, res) => {
     let sortBy = req.query.sortBy ? req.query.sortBy : '_id';
     // need to parse limit to an integer for query
     let limit = req.query.limit ? parseInt(req.query.limit) : 10;
-    Post.find()
+    let search = {}
+    if (req.query.id) {
+        search = { userId: req.query.id }
+    }
+    Post.find(search)
         .select("-photo")
         .sort([[sortBy, order]])
         .limit(limit)
@@ -131,12 +163,34 @@ postById = (req, res, next, id) => {
         next();
     });
 };
-
+getLiked = (req, res) => {
+    let order = req.query.order ? req.query.order : 'asc';
+    let sortBy = req.query.sortBy ? req.query.sortBy : '_id';
+    // need to parse limit to an integer for query
+    let limit = req.query.limit ? parseInt(req.query.limit) : 10;
+    let search = {}
+    if (req.query.id) {
+        search = { usersLiked: { $elemMatch: { $eq: req.query.id } } }
+    }
+    Post.find(search)
+        .select("-photo")
+        .sort([[sortBy, order]])
+        .limit(limit)
+        .exec((err, success) => {
+            if (err) {
+                return res.status(400).json({
+                    error: "Post is not found"
+                });
+            }
+            res.json(success);
+        });
+};
 // routes
 router.get('/posts/photo/:postId', photo)
 router.get('/posts/highlight/:postId', photoHighlight)
 router.get('/posts/highlight2/:postId', photoHighlight2)
 router.get('/posts', list);
+router.get('/posts-liked', getLiked);
 router.param('postId', postById);
 
 
