@@ -1,5 +1,6 @@
 .messages {
-    padding: 5% 0;
-    overflow: auto;
-    flex: auto;
-  }
+  border: solid .75px black;
+  padding: none;
+  overflow: auto;
+  flex: auto;
+}

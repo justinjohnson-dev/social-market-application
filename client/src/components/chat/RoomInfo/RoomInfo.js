@@ -1,21 +1,54 @@
 import React from 'react';
-
+import './RoomInfo.css';
+import closeIcon from './closeIcon.png';
+import { Component } from 'react';
+import PropTypes from "prop-types";
+import { connect } from "react-redux";
 import './RoomInfo.css';
 
-import closeIcon from './closeIcon.png';
-
-
-const RoomInfo = ( { roomName } ) => (
+class RoomInfo extends Component {
     
-    <div className="roomInfo">
-        <div className="leftInnerContainer">
-            <h3>{ roomName }</h3>
-        </div>
-        <div className="rightInnerContainer">
-            <a href="/"><img src={closeIcon} alt="close image" /></a>
-        </div>
-    </div>
+    constructor(props) {
+        super(props);
+        this.state = {
+            errors: {}
+        }
+    }
 
-);
+    render() {
 
-export default RoomInfo;
+        const roomName = this.props.roomName;
+        const { user } = this.props.auth;
+        
+        return(
+            <div className="roomInfo">
+                <div className="leftInnerContainer">
+                    <div className="roomInfoText">{ `${user.name} is in the chat room: ${roomName}` }</div>
+                 </div>
+                <div className="rightInnerContainer">
+                    <a href="/"><img src={closeIcon} alt="close image" /></a>
+                 </div>
+            </div>
+        );
+        
+    }
+
+}
+
+RoomInfo.propTypes = {    
+    auth: PropTypes.object.isRequired,
+    roomName: PropTypes.string.isRequired
+    
+};
+
+const mapStateToProps = state => ({
+    auth: state.auth,
+    errors: state.errors,
+    // roomName: state.roomName
+
+});
+
+export default connect(
+    mapStateToProps,
+    {}
+)(RoomInfo);

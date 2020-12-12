@@ -1,58 +1,38 @@
-//This will need to change to integrate the users in mongodb,
-//for now I am just setting it up so a user can enter a name
-//and a chat room and join if there is not a user with that 
-//name already in the chatroom
+const users = [];
 
-const chatUsers = [];
+// adds user
+const addUser = ( {id, name, room} ) => {
 
-const addUserToChat = ( { id, userName, roomName } ) => {
+    name = name.trim().toLowerCase();
     
-    //trim and makes lowercase username and chat room name 
-    userName = userName.trim().toLowerCase();
-    roomName = roomName.trim().toLowerCase();
+    room = room.trim().toLowerCase();
 
-    //returns error username and room are not entered
-    if (!userName || !roomName) return {
+    if(!name || !room) return { error: 'Username and room are required.' };
 
-        error: 'User name and room name are required to enter the chat room.'
-    
-    }
+    //create user
+    const user = { id, name, room };
 
-    const user = { id, userName, roomName};
-
-    //adds user to array of users
-    chatUsers.push(user);
+    //push user onto array
+    users.push(user)
 
     return {user};
-
 }
 
-const removeUserFromChat = (id) => {
+// remove user
+const removeUser = (id) => {
 
-    const userIndex = chatUsers.findIndex((user) => 
-    
-        user.id === id
-    
-    );
+    const index = users.findIndex((user) => user.id === id);
 
-    if (userIndex !== -1) {
+    if (index !== -1) {
 
-        return chatUsers.splice(userIndex, 1)[0];
+        return users.splice(index, 1)[0];
 
     }
-
 }
 
-const getUsersInRoom = ((roomName) => 
 
-    chatUsers.filter((user) => user.roomName === roomName)
+const getUser = (id) => users.find((user) => user.id ===id);
 
-)
+const getUsersInRoom = (room) => users.filter((user) => user.room === room);
 
-const getUser = (id) => {
-   
-    chatUsers.find((user) => user.id === id);
-
-}
-
-module.exports = { addUserToChat, removeUserFromChat, getUser, getUsersInRoom };
+module.exports = { addUser, removeUser, getUser, getUsersInRoom };

@@ -59,7 +59,8 @@ const menuItems = [
     {
         listIcon: <Chat />,
         listText: "Chat Room",
-        listPath: "/chat"
+        //necessary for linking to api endpoints
+        listPath: "/JoinChat"
     }
 
 ]
