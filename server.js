@@ -89,7 +89,7 @@ io.on('connect', function(socket){
     if (error) return callback(error);
 
     //admin message to user
-    socket.emit('message', { user: 'admin', text: `${user.name}, thanks for stopping by chatroom ${user.room}.` });
+    socket.emit('message', { user: 'admin', text: `${user.name}, thanks for stopping by chatroom: ${user.room}.` });
 
     //admin message to all users saying a user has joined
     socket.broadcast.to(user.room).emit('message', { user: 'admin', text: `${user.name} has joined!` });
