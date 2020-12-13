@@ -89,7 +89,7 @@ io.on('connect', function(socket){
     if (error) return callback(error);
 
     //admin message to user
-    socket.emit('message', { user: 'admin', text: `${user.name}, thanks for stopping by chatroom ${user.room}.` });
+    socket.emit('message', { user: 'admin', text: `${user.name}, thanks for stopping by chatroom: ${user.room}.` });
 
     //admin message to all users saying a user has joined
     socket.broadcast.to(user.room).emit('message', { user: 'admin', text: `${user.name} has joined!` });
@@ -153,6 +153,7 @@ const orderRoutes = require('./routes/api/order');
 const orderResponseRoutes = require('./routes/api/orderResponse');
 const chatRoomRoutes = require('./routes/api/chatRoom');
 const chatRoutes = require('./routes/api/chat');
+const { EventEmitter } = require('events');
 
 
 // middlewares

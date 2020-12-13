@@ -74,8 +74,8 @@ class ChatRedux extends Component {
         //set state of user, roomname - triggers re-render
         this.setState({user, roomName})
 
-        //socket connection
-        socket = io(PORT);
+        //socket connection, changes from request polling to init web socket on join, create to use for sending messages etc.
+        socket = io(PORT, {transports: ['websocket']});
 
         //join info to 
         socket.emit('join', { name: user, room: roomName }, (error) => {
