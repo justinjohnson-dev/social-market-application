@@ -156,6 +156,12 @@ function ComplexGrid(props) {
         <FormControlLabel value="no" control={<Radio />} label="No" />
         
       </RadioGroup>
+      <div>
+      <Button variant="contained"  onClick={onSubmit} >
+                {loader? "...":"Save"} 
+               
+                </Button>
+                </div>
                   </label>
                   
                   </div>
