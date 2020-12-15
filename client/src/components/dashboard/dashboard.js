@@ -161,7 +161,7 @@ function ComplexGrid(props) {
                   </div>
 
                 </div>
-                <Button variant="contained" color="primary" onClick={onSubmit} >
+                <Button variant="contained"  onClick={onSubmit} >
                 {loader? "...":"Upload"} 
                 </Button>
               </Grid>
