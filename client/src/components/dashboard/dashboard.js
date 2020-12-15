@@ -18,9 +18,9 @@ import RadioGroup from '@material-ui/core/RadioGroup';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import FormControl from '@material-ui/core/FormControl';
 import FormLabel from '@material-ui/core/FormLabel';
-import GetPost from './fetchPostFarmer'
-import GetLikedPost from './fetchLIkedPosts'
+
 import axios from "axios";
+import Tabs from "./Tabs";
 const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
@@ -82,6 +82,10 @@ function ComplexGrid(props) {
     
     // add data from state to form   
   };
+
+  const handleChange = e => {
+    console.log(e.target.value)
+  }
  
   return (
    
@@ -122,17 +126,25 @@ function ComplexGrid(props) {
                   aria-label="add"
                   variant="extended"
                 >
+                  
                   <AddIcon /> 
+                  
                 </Fab>
-             
-              </label>
                 
+          
+              </label>
+              <Grid>
+          <Button variant="contained"  onClick={onSubmit} >
+                {loader? "...":"Save"}
+                </Button></Grid>
       
                </CardActions>
+              
               </CardActionArea>
             </Card>
+           
           </Grid>
-
+         
           <Grid item md={8} sm container>
             <Grid item xs container direction="column" spacing={2}>
 
@@ -140,6 +152,7 @@ function ComplexGrid(props) {
                 <div className={classes.formContent}>
                   <div>
                     User Profile
+                  
                </div>
                 
                   <div>
@@ -148,22 +161,9 @@ function ComplexGrid(props) {
                   <div>
                     <label> Email: {user.email} </label>
                   </div>
-                  <div>
-                    <label>
-                      Farmer:
-                       <RadioGroup aria-label="farmer" name="notfarmer" > 
-        <FormControlLabel value="yes" control={<Radio />} label="Yes" />
-        <FormControlLabel value="no" control={<Radio />} label="No" />
-        
-      </RadioGroup>
-                  </label>
-                  
-                  </div>
-
+                 
                 </div>
-                <Button variant="contained" color="primary" onClick={onSubmit} >
-                {loader? "...":"Upload"} 
-                </Button>
+                  
               </Grid>
             </Grid>
           </Grid>
@@ -174,19 +174,31 @@ function ComplexGrid(props) {
    
     </div>
     <div className={classes.root}>
+    <Tabs/>
+    </div>
+    {/* <div className={classes.root}>
    <GetLikedPost/>
   </div>
    <div className={classes.root}>
               
                <GetPost />       
+  </div> */}
   </div>
-  
-</div>
+
   );
 }
 const mapStateToProps = state => ({
   auth: state.auth
 });
+
+function a11yProps(index) {
+  return {
+    id: `simple-tab-${index}`,
+    'aria-controls': `simple-tabpanel-${index}`,
+  };
+}
+
+
 
 export default connect(
   mapStateToProps
