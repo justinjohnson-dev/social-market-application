@@ -1,7 +1,11 @@
 .Footer {
     background: #679459;
     color: white;
-    padding: 50 em;
+    padding: 100 em;
 }
-
+.material-icons {
+    display: inline-block;
+    line-height: 1;
+    font-size: inherit;
+}
 

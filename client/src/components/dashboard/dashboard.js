@@ -82,6 +82,10 @@ function ComplexGrid(props) {
     
     // add data from state to form   
   };
+
+  const handleChange = e => {
+    console.log(e.target.value)
+  }
  
   return (
    
@@ -122,17 +126,25 @@ function ComplexGrid(props) {
                   aria-label="add"
                   variant="extended"
                 >
+                  
                   <AddIcon /> 
+                  
                 </Fab>
-             
-              </label>
                 
+          
+              </label>
+              <Grid>
+          <Button variant="contained"  onClick={onSubmit} >
+                {loader? "...":"Save"}
+                </Button></Grid>
       
                </CardActions>
+              
               </CardActionArea>
             </Card>
+           
           </Grid>
-
+         
           <Grid item md={8} sm container>
             <Grid item xs container direction="column" spacing={2}>
 
@@ -140,6 +152,7 @@ function ComplexGrid(props) {
                 <div className={classes.formContent}>
                   <div>
                     User Profile
+                  
                </div>
                 
                   <div>
@@ -148,28 +161,9 @@ function ComplexGrid(props) {
                   <div>
                     <label> Email: {user.email} </label>
                   </div>
-                  <div>
-                    <label>
-                      Farmer:
-                       <RadioGroup aria-label="farmer" name="notfarmer" > 
-        <FormControlLabel value="yes" control={<Radio />} label="Yes" />
-        <FormControlLabel value="no" control={<Radio />} label="No" />
-        
-      </RadioGroup>
-      <div>
-      <Button variant="contained"  onClick={onSubmit} >
-                {loader? "...":"Save"} 
-               
-                </Button>
+                 
                 </div>
-                  </label>
                   
-                  </div>
-
-                </div>
-                <Button variant="contained"  onClick={onSubmit} >
-                {loader? "...":"Upload"} 
-                </Button>
               </Grid>
             </Grid>
           </Grid>
@@ -189,9 +183,8 @@ function ComplexGrid(props) {
               
                <GetPost />       
   </div> */}
-  
-  
-</div>
+  </div>
+
   );
 }
 const mapStateToProps = state => ({
