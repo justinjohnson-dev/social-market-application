@@ -1,9 +1,15 @@
 .hello-user {
     font-family: 'Courier New', Courier, monospace;
+    
 }
 
 .container {
     background: none;
     margin: 0px auto;
-    margin-top: 10%;
+ 
+}
+.material-icons {
+    display: inline-block;
+    line-height: 1;
+    font-size: inherit;
 }

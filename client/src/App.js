@@ -45,6 +45,7 @@ if (localStorage.jwtToken) {
 class App extends Component {
   render() {
     return (
+
 <>
 <div className = "Content">
       <Provider store={store}>
@@ -70,6 +71,7 @@ class App extends Component {
         </Router>
       </Provider>
       </div>
+
       <Footer className = "Footer" />
       </>
     );
